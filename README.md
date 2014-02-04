@@ -1,3 +1,3 @@
 what-dose-the-board-say
 =======================
-doubaba
+A sync board.
