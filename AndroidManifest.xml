@@ -34,6 +34,11 @@
             android:name="com.example.whatdosetheboardsay.StartUpInterfaceActivity"
             android:label="@string/title_activity_start_up_interface" >
         </activity>
+        <activity
+            android:name="com.example.whatdosetheboardsay.JoinActivity"
+            android:label="@string/title_activity_join"
+            android:windowSoftInputMode="adjustResize|stateVisible" >
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
