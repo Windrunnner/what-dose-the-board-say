@@ -39,6 +39,10 @@
             android:label="@string/title_activity_join"
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
+        <activity
+            android:name="com.example.whatdosetheboardsay.MainframeActivity"
+            android:label="@string/title_activity_mainframe" >
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
