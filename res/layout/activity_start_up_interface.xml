@@ -9,7 +9,7 @@
     tools:context=".StartUpInterfaceActivity" >
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/start_join_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -19,12 +19,12 @@
         android:text="Join a Board" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/start_create_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button1"
-        android:layout_alignLeft="@+id/button1"
-        android:layout_alignRight="@+id/button1"
+        android:layout_above="@+id/start_join_button"
+        android:layout_alignLeft="@+id/start_join_button"
+        android:layout_alignRight="@+id/start_join_button"
         android:layout_marginBottom="24dp"
         android:text="Create New"
         android:textSize="25sp" />
@@ -33,7 +33,7 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button2"
+        android:layout_above="@+id/start_create_button"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="128dp"
         android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -42,9 +42,9 @@
         android:id="@+id/avatar_image"
         android:layout_width="800dip"
         android:layout_height="800dp"
-        android:layout_above="@+id/button2"
+        android:layout_above="@+id/start_create_button"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="35dp"
-        android:contentDescription="T" />
+        android:contentDescription="The Logo" />
    
 </RelativeLayout>
