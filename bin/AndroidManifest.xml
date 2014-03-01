@@ -35,9 +35,18 @@
             android:label="@string/title_activity_start_up_interface" >
         </activity>
         <activity
+<<<<<<< HEAD
             android:name="com.example.whatdosetheboardsay.JoinActivity"
             android:label="@string/title_activity_join"
             android:windowSoftInputMode="adjustResize|stateVisible" >
+=======
+            android:name="com.example.whatdosetheboardsay.JoinInterface_activity"
+            android:label="@string/title_activity_join_interface_activity" >
+        </activity>
+        <activity
+            android:name="com.example.whatdosetheboardsay.CreateInterfaceActivity"
+            android:label="@string/title_activity_create_interface" >
+>>>>>>> 55c6764ab8afafebeda5dd4c70257decc9463ee2
         </activity>
     </application>
 
