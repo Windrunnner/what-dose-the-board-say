@@ -7,6 +7,11 @@ import java.nio.ByteBuffer;
 import android.util.Log;
 
 public class JoinBoard {
+	
+	/**
+	 * @param serverIP
+	 * @return -1 if Failed, otherwise return client number.
+	 */
 	public static int join(String serverIP) {
         try {
     		InetAddress serverAddr = InetAddress.getByName(serverIP);
@@ -31,6 +36,11 @@ public class JoinBoard {
             return -1;
         }		
 	}
+	/**
+	 * @param serverIP
+	 * @param password
+	 * @return -1 if Failed, otherwise return client number.
+	 */
 	public static int join(String serverIP, String password) {
         try {
     		InetAddress serverAddr = InetAddress.getByName(serverIP);
