@@ -30,7 +30,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.whatdosetheboardsay.MainActivity" />
         </activity>
+        <activity
+            android:name="com.example.whatdosetheboardsay.StartUpInterfaceActivity"
+            android:label="@string/title_activity_start_up_interface" >
+        </activity>
     </application>
-<uses-permission android:name="android.permission.INTERNET"/>
-<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
 </manifest>
