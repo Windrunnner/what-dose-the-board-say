@@ -47,6 +47,10 @@
             android:name="com.example.whatdosetheboardsay.ButtonFragmentsActivity"
             android:label="@string/title_activity_button_fragments" >
         </activity>
+        <activity
+            android:name="com.example.whatdosetheboardsay.WorkSpaceActivity"
+            android:label="@string/title_activity_work_space" >
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

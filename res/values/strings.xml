@@ -10,5 +10,6 @@
     <string name="title_activity_create_interface">CreateInterfaceActivity</string>
     <string name="title_activity_mainframe">MainframeActivity</string>
     <string name="title_activity_button_fragments">ButtonFragmentsActivity</string>
+    <string name="title_activity_work_space">WorkSpaceActivity</string>
 
 </resources>
