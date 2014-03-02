@@ -62,4 +62,13 @@
         android:onClick="sendMessage"
         android:text="Send" />
 
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/button1"
+        android:layout_alignLeft="@+id/button3"
+        android:layout_marginLeft="32dp"
+        android:text="Launcher" />
+
 </RelativeLayout>
