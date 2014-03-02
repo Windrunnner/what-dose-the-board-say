@@ -69,6 +69,7 @@
         android:layout_alignBottom="@+id/button1"
         android:layout_alignLeft="@+id/button3"
         android:layout_marginLeft="32dp"
+        android:onClick="launchMainFrame"
         android:text="Launcher" />
 
 </RelativeLayout>
