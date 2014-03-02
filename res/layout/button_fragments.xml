@@ -1,0 +1,120 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".ButtonFragmentsActivity" >
+
+    <Button
+        android:id="@+id/userManage_button"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="User Manage" />
+
+    <Button
+        android:id="@+id/setting_button"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/userManage_button"
+        android:layout_below="@+id/userManage_button"
+        android:text="Settings" />
+    
+    <Button
+        android:id="@+id/pen_button"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/userManage_button"
+        android:layout_below="@+id/setting_button"
+        android:text="Pencil" />
+
+    <Button
+        android:id="@+id/eraser_button"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_alignLeft="@+id/pen_button"
+        android:layout_alignRight="@+id/pen_button"
+        android:layout_below="@+id/pen_button"
+        android:text="Eraser" />
+
+    <Button
+        android:id="@+id/text_button"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_alignLeft="@+id/pen_button"
+        android:layout_alignRight="@+id/pen_button"
+        android:layout_below="@+id/eraser_button"
+        android:text="Text" />
+
+    <Button
+        android:id="@+id/image_button"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_alignLeft="@+id/text_button"
+        android:layout_alignRight="@+id/text_button"
+        android:layout_below="@+id/text_button"
+        android:text="Image" />
+
+    <Button
+        android:id="@+id/save_button"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_alignLeft="@+id/image_button"
+        android:layout_alignRight="@+id/image_button"
+        android:layout_below="@+id/image_button"
+        android:text="Save" />
+
+    <Button
+        android:id="@+id/clean_button"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_alignLeft="@+id/save_button"
+        android:layout_alignRight="@+id/save_button"
+        android:layout_below="@+id/save_button"
+        android:text="Clean" />
+
+    <Button
+        android:id="@+id/mode_button"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_alignLeft="@+id/clean_button"
+        android:layout_alignRight="@+id/clean_button"
+        android:layout_below="@+id/clean_button"
+        android:text="Mode" />
+
+    <Button
+        android:id="@+id/undo_button"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_alignLeft="@+id/mode_button"
+        android:layout_below="@+id/mode_button"
+        android:layout_marginTop="22dp"
+        android:text="Undo" />
+
+    <Button
+        android:id="@+id/redo_button"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_alignBaseline="@+id/undo_button"
+        android:layout_alignBottom="@+id/undo_button"
+        android:layout_alignRight="@+id/mode_button"
+        android:text="Redo" />
+
+    <Button
+        android:id="@+id/voice_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/undo_button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/redo_button"
+        android:text="Voice:On/Off" />
+
+</RelativeLayout>
