@@ -8,6 +8,11 @@ import java.util.ArrayList;
 
 import android.util.Log;
  
+/**
+ * The server thread.
+ * @author Len
+ *
+ */
 public class Server implements Runnable  {
  
         public static String ServerIP = "127.0.0.1";
