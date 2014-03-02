@@ -43,6 +43,10 @@
             android:name="com.example.whatdosetheboardsay.MainframeActivity"
             android:label="@string/title_activity_mainframe" >
         </activity>
+        <activity
+            android:name="com.example.whatdosetheboardsay.ButtonFragmentsActivity"
+            android:label="@string/title_activity_button_fragments" >
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

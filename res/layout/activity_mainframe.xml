@@ -8,15 +8,17 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainframeActivity" >
 
-    <fragment android:name="com.example.android.fragments.HeadlinesFragment"
-              android:id="@+id/button_fragments"
-              android:layout_weight="1"
-              android:layout_width="0dp"
-              android:layout_height="match_parent" />
+    <fragment
+        android:id="@+id/button_fragments"
+        android:name="com.example.android.fragments.button_fragments"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        tools:layout="@layout/button_fragments" />
 
-    <fragment android:name="com.example.android.fragments.ArticleFragment"
+    <fragment android:name="com.example.android.fragments.workSpace_fragments"
               android:id="@+id/workSpace_fragments"
-              android:layout_weight="6"
+              android:layout_weight="5"
               android:layout_width="0dp"
               android:layout_height="match_parent" />
 	
