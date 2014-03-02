@@ -25,10 +25,10 @@ public class Client implements Runnable {
                     		}
                     		Log.d("UDP", "C: CheckPoint");
                     		byte[] buf = str.getBytes();
-                        	DatagramPacket packet = new DatagramPacket(ByteBuffer.allocate(4).putInt(buf.length).array(),4, serverAddr, Server.SERVERPORT);
+                        	DatagramPacket packet = new DatagramPacket(ByteBuffer.allocate(4).putInt(buf.length).array(),4, serverAddr, 2333);
                         	Log.d("UDP", "C: Sending: size '" + String.valueOf(buf.length) + "'");
                         	socket.send(packet);
-                        	packet = new DatagramPacket(buf, buf.length, serverAddr, Server.SERVERPORT);
+                        	packet = new DatagramPacket(buf, buf.length, serverAddr, 2333);
                         	Log.d("UDP", "C: Sending: data '" + new String(buf) + "'");
                         	socket.send(packet);
                         	Log.d("UDP", "C: Done.");

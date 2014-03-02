@@ -8,5 +8,6 @@
     <string name="title_activity_start_up_interface">StartUpInterfaceActivity</string>
     <string name="title_activity_join_interface_activity">JoinInterface_activity</string>
     <string name="title_activity_create_interface">CreateInterfaceActivity</string>
+    <string name="title_activity_mainframe">MainframeActivity</string>
 
 </resources>
