@@ -1,5 +1,11 @@
 package com.example.whatdosetheboardsay;
-
+/**
+ * This the fragment of the whiteboard workspace.
+ * It redirect the activity to the WorkSpaceView class.
+ * related to activity_work_space.xml
+ * @author Yik Fei Wong
+ *
+ */
 import android.os.Bundle;
 import android.annotation.SuppressLint;
 import android.app.Activity;

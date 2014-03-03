@@ -1,5 +1,12 @@
 package com.example.whatdosetheboardsay;
-
+/**
+ * The MainframeActivity Class is for the activities in 
+ * mainframe. It is composed of 2 fragments, one for button
+ * and another for the whiteboard workspace.
+ * related to activity_mainframe.xml
+ * @author Zhuo Chen, Yik Fei Wong
+ *
+ */
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;

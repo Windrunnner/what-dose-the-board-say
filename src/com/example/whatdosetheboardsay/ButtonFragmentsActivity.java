@@ -1,5 +1,12 @@
 package com.example.whatdosetheboardsay;
-
+/**
+ * This is the fragment for buttons. The buttons
+ * will provide different functions to control 
+ * the activity in whiteboard workspace fragment.
+ * related to button_fragments.xml
+ * @author Zhuo Chen, Yik Fei Wong
+ *
+ */
 import android.os.Bundle;
 import android.annotation.SuppressLint;
 import android.app.Activity;
