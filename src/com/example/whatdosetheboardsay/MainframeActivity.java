@@ -1,11 +1,10 @@
 package com.example.whatdosetheboardsay;
 
-import android.os.Bundle;
 import android.app.Activity;
-import android.view.Menu;
+import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
-public class MainframeActivity extends FragmentActivity {
+public class MainframeActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -14,11 +13,11 @@ public class MainframeActivity extends FragmentActivity {
 		
 	}
 
-	@Override
+/*	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.mainframe, menu);
 		return true;
-	}
+	}*/
 
 }

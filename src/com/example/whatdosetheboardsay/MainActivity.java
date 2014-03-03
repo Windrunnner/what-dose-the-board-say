@@ -45,7 +45,7 @@ public class MainActivity extends Activity {
    	}
     
     public void launchMainFrame(View view){
-    	Intent intent = new Intent(this, WorkSpaceActivity.class);
+    	Intent intent = new Intent(this, MainframeActivity.class);
   	  	startActivity(intent);
     }
     @Override

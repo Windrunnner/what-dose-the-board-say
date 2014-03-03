@@ -10,16 +10,16 @@
 
     <fragment
         android:id="@+id/button_fragments"
-        android:name="com.example.android.fragments.button_fragments"
-        android:layout_width="0dp"
+        android:name="com.example.whatdosetheboardsay.ButtonFragmentsActivity"
+        android:layout_width="0dip"
         android:layout_height="match_parent"
         android:layout_weight="1"
         tools:layout="@layout/button_fragments" />
 
     <fragment
-        android:id="@+id/workSpace_fragments"
-        android:name="com.example.android.fragments.workSpace_fragments"
-        android:layout_width="0dp"
+        android:id="@+id/workspace_fragments"
+        android:name="com.example.whatdosetheboardsay.WorkSpaceActivity"
+        android:layout_width="0dip"
         android:layout_height="match_parent"
         android:layout_weight="5"
         tools:layout="@layout/activity_work_space" />
