@@ -6,6 +6,12 @@ import java.nio.ByteBuffer;
 
 import android.util.Log;
 
+/**
+ * The JoinBoard class has two static method. Called can know if the 
+ * filled IP and password are valid by the returned int. 
+ * @author Len
+ *
+ */
 public class JoinBoard {
 	
 	/**
