@@ -9,7 +9,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 
-public class randomLine implements Serializable
+public class randomLineMsg implements Serializable
 {
 	private Vector points = new Vector();
 	private int x0, y0, x1, y1;

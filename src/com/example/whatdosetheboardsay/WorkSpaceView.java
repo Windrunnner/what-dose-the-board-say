@@ -13,14 +13,14 @@ public class WorkSpaceView extends View
 	private int mLastX, mLastY;
 	private int mCurrX, mCurrY;
     private MainframeActivity mMainframActivity;
-    private randomLine ranLine;
+    private randomLineMsg ranLine;
       
     private Bitmap mBitmap;  //保存每次绘画的结果  
     private Paint mPaint;
       
     public WorkSpaceView(Context context, AttributeSet attrs) {  
         super(context, attrs);  
-        ranLine = new randomLine();
+        ranLine = new randomLineMsg();
         mPaint = new Paint();  
         mPaint.setStrokeWidth(2);
     }  
