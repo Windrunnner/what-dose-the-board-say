@@ -10,7 +10,7 @@ import android.widget.EditText;
 public class MainActivity extends Activity {
 	public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
 	public static Client client;
-	@Override
+	private static Thread serverThread = null;
     public void onCreate(Bundle icicle) {
     	        super.onCreate(icicle);
     	        setContentView(R.layout.activity_main);
@@ -31,17 +31,21 @@ public class MainActivity extends Activity {
    // 	 startActivity(intent);
         }
     public void sendServer(View view) {
-    	  new Thread(new Server()).start();
-    	  Intent intent = new Intent(this, DisplayMessageActivity.class);
-    	  intent.putExtra(EXTRA_MESSAGE, GDB_sc.GetLocalIpAddress());
-    	  startActivity(intent);
+    	if (serverThread == null){
+    		serverThread = new Thread(new Server());
+    		serverThread.start();
+    	}   		
+    	
+    	Intent intent = new Intent(this, DisplayMessageActivity.class);
+    	intent.putExtra(EXTRA_MESSAGE, GDB_sc.GetLocalIpAddress());
+    	startActivity(intent);
     }
     public void sendMessage(View view){
- 	 EditText editText = (EditText) findViewById(R.id.editText4);
-   	 Client.str = editText.getText().toString();
-   	synchronized (MainActivity.client) {
-   	 client.notify();
-   	}
+    	EditText editText = (EditText) findViewById(R.id.editText4);
+    	Client.str = editText.getText().toString();
+    	synchronized (MainActivity.client) {
+    		client.notify();
+    	}
    	}
     
     public void launchMainFrame(View view){
