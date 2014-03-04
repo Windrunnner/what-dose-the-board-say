@@ -18,7 +18,7 @@ public class Server implements Runnable  {
         public static String ServerIP = "127.0.0.1";
         public static ArrayList<String> addList = new ArrayList<String>();
         private int clientCount = 0;
-        public static String password;
+        public static String password = null;
         @Override
         public void run() {
                 ServerIP = GDB_sc.GetLocalIpAddress();
@@ -49,7 +49,7 @@ public class Server implements Runnable  {
                         	String attempt = new String(packet.getData());
                         	Log.d("UDP", "S: Done. Testing the Attempt");
                         	/*Test 1, No pass*/
-                        	if (password.length() == 0){
+                        	if (password == null || password.length() == 0){
                         		if (attempt.indexOf('|') == -1){
                         			addList.add(attempt);
                         			returnAddr = InetAddress.getByName(attempt);

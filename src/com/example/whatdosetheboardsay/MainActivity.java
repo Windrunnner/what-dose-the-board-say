@@ -15,6 +15,11 @@ public class MainActivity extends Activity {
     	        super.onCreate(icicle);
     	        setContentView(R.layout.activity_main);
     }
+    
+    public void jumpButton(View view){
+    	Intent intent = new Intent(this, StartUpInterfaceActivity.class);
+    	startActivity(intent);
+    }
 	
     public void sendClient(View view) {
      	 Intent intent = new Intent(this, DisplayMessageActivity.class);

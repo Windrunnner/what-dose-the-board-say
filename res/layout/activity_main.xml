@@ -72,4 +72,13 @@
         android:onClick="launchMainFrame"
         android:text="Launcher" />
 
+    <Button
+        android:id="@+id/jumpbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/button4"
+        android:layout_toRightOf="@+id/editText1"
+        android:text="Button" 
+        android:onClick="jumpButton"/>
+
 </RelativeLayout>
