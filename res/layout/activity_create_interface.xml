@@ -166,7 +166,7 @@
 
    <EditText
 
-       android:id="@+id/editText1"
+       android:id="@+id/editIpAddress_create"
 
        android:layout_width="wrap_content"
 
@@ -182,7 +182,7 @@
 
    <EditText
 
-       android:id="@+id/editText2"
+       android:id="@+id/editSetPassword_create"
 
        android:layout_width="wrap_content"
 
@@ -206,7 +206,7 @@
 
    <EditText
 
-       android:id="@+id/editText3"
+       android:id="@+id/editInvite_create"
 
        android:layout_width="wrap_content"
 
