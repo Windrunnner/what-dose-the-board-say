@@ -32,7 +32,7 @@
         android:textSize="25sp" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/start_up_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/start_create_button"
@@ -41,7 +41,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <ImageView
-        android:id="@+id/avatar_image"
+        android:id="@+id/avatar_image_start"
         android:layout_width="800dip"
         android:layout_height="800dp"
         android:layout_above="@+id/start_create_button"
