@@ -10,16 +10,19 @@ import android.view.View;
 
 public class WorkSpaceView extends View
 {
-	private int mLastX, mLastY; //上次触屏的位置  
-    private int mCurrX, mCurrY; //当前触屏的位置  
+	private int mLastX, mLastY;
+	private int mCurrX, mCurrY;
+    private MainframeActivity mMainframActivity;
+    private randomLine ranLine;
       
     private Bitmap mBitmap;  //保存每次绘画的结果  
-    private Paint mPaint;  
+    private Paint mPaint;
       
     public WorkSpaceView(Context context, AttributeSet attrs) {  
         super(context, attrs);  
+        ranLine = new randomLine();
         mPaint = new Paint();  
-        mPaint.setStrokeWidth(6);  
+        mPaint.setStrokeWidth(2);
     }  
   
     @Override  
@@ -33,31 +36,32 @@ public class WorkSpaceView extends View
             mBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);  
         }  
           
-//先将结果画到Bitmap上  
+        //先将结果画到Bitmap上  
         Canvas tmpCanvas = new Canvas(mBitmap);  
-        tmpCanvas.drawLine(mLastX, mLastY, mCurrX, mCurrY, mPaint);  
-  
-//再把Bitmap画到canvas上  
+        tmpCanvas.drawLine(mLastX, mLastY, mCurrX, mCurrY, mPaint);
+        //再把Bitmap画到canvas上  
         canvas.drawBitmap(mBitmap, 0, 0, mPaint);  
     }  
       
     @Override  
-    public boolean onTouchEvent(MotionEvent event) {  
-          
-        mLastX = mCurrX;  
-        mLastY = mCurrY;  
-        mCurrX = (int) event.getX();  
-        mCurrY = (int) event.getY();  
-          
+    public boolean onTouchEvent(MotionEvent event) {
+    	mLastX = mCurrX;
+    	mLastY = mCurrY;
+    	mCurrX = (int)event.getX();
+    	mCurrY = (int)event.getY();
+    	ranLine.setPoints(mCurrX, mCurrY);
+    	
         switch (event.getAction()) {  
         case MotionEvent.ACTION_DOWN:  
-            mLastX = mCurrX;  
-            mLastY = mCurrY;  
-            break;  
+            mLastX = mCurrX;
+            mLastY = mCurrY;
+            break;
+        case MotionEvent.ACTION_UP:
+        	break;
         default:  
             break;  
         }  
-          
+        
         invalidate();  
   
         return true; //必须返回true  
