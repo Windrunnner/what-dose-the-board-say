@@ -44,6 +44,14 @@
             android:label="@string/title_activity_mainframe" >
         </activity>
         <activity
+            android:name="com.example.whatdosetheboardsay.JoinInterface_activity"
+            android:label="@string/title_activity_join_interface_activity" >
+        </activity>
+        <activity
+            android:name="com.example.whatdosetheboardsay.CreateInterfaceActivity"
+            android:label="@string/title_activity_create_interface" >
+        </activity>
+        <activity
             android:name="com.example.whatdosetheboardsay.ButtonFragmentsActivity"
             android:label="@string/title_activity_button_fragments" >
         </activity>

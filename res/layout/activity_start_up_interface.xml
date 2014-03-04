@@ -16,6 +16,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="129dp"
         android:textSize="25sp"
+        android:onClick="toJoin"
         android:text="Join a Board" />
 
     <Button
@@ -25,6 +26,7 @@
         android:layout_above="@+id/start_join_button"
         android:layout_alignLeft="@+id/start_join_button"
         android:layout_alignRight="@+id/start_join_button"
+        android:onClick="toCreate"
         android:layout_marginBottom="24dp"
         android:text="Create New"
         android:textSize="25sp" />
