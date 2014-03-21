@@ -10,6 +10,7 @@ import android.widget.EditText;
 public class MainActivity extends Activity {
 	public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
 	public static Client client;
+	public static Server server;
 	private static Thread serverThread = null;
     public void onCreate(Bundle icicle) {
     	        super.onCreate(icicle);
@@ -37,7 +38,8 @@ public class MainActivity extends Activity {
         }
     public void sendServer(View view) {
     	if (serverThread == null){
-    		serverThread = new Thread(new Server());
+    		server = new Server();
+    		serverThread = new Thread(server);
     		serverThread.start();
     	}   		
     	

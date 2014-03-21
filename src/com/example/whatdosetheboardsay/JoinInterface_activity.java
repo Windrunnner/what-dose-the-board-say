@@ -28,6 +28,7 @@ public class JoinInterface_activity extends Activity {
 	public void tryJoin(View view) {
     	String ipString =((EditText) findViewById(R.id.ipedit)).getText().toString();
     	String passString = ((EditText) findViewById(R.id.passedit)).getText().toString();
+    	GDB_sc.SetServerIpAddress(ipString);
     	JoinBoard.serverIP = ipString;
     	JoinBoard.password = passString;
     	joinThread = new JoinBoard();
@@ -41,8 +42,10 @@ public class JoinInterface_activity extends Activity {
     	}
     	Log.d("JOIN", new Integer(uid).toString());
     	if (uid != -1){
-        	Intent intent = new Intent(this, MainframeActivity.class);
-      	  	startActivity(intent);
+    		MainActivity.client = new Client();
+    		new Thread(MainActivity.client).start();
+        	//Intent intent = new Intent(this, MainframeActivity.class);
+      	  	//startActivity(intent);
     	}
 	}
 

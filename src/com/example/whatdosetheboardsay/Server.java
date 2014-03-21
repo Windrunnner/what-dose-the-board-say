@@ -8,25 +8,37 @@ import java.util.ArrayList;
 
 import android.util.Log;
  
-/**
- * The server thread.
- * @author Len
- *
- */
+
 public class Server implements Runnable  {
  
         public static String ServerIP = "127.0.0.1";
         public static ArrayList<String> addList = new ArrayList<String>();
         private int clientCount = 0;
         public static String password = null;
-        @Override
+        private DatagramSocket socket;
+        
+        public void sendMessage(byte[] toall){
+    		for(int i=0; i<clientCount; i++){
+    			try{
+    			InetAddress clientAddr = InetAddress.getByName(addList.get(i));
+    			DatagramPacket packetsize = new DatagramPacket(ByteBuffer.allocate(4).putInt(toall.length).array(),4, clientAddr, 2333);
+    			socket.send(packetsize);
+    			packetsize = new DatagramPacket(toall, toall.length, clientAddr, 2333);
+    			socket.send(packetsize);
+    			}catch(Exception e){
+                    Log.e("UDP", "S: Error", e);
+    			}
+    		}
+        }
+    		@Override
         public void run() {
                 ServerIP = GDB_sc.GetLocalIpAddress();
                 byte[] bufsize = new byte[4];
                     try {
+                    	GDB_sc.setServer();
                         InetAddress serverAddr = InetAddress.getByName(ServerIP);
                         Log.d("UDP", "S: Connecting...");
-                        DatagramSocket socket = new DatagramSocket(2333, serverAddr); 
+                        socket = new DatagramSocket(2333, serverAddr); 
                         InetAddress returnAddr;
                         DatagramPacket returnPacket;
                         while(true){
@@ -49,6 +61,8 @@ public class Server implements Runnable  {
                         	String attempt = new String(packet.getData());
                         	Log.d("UDP", "S: Done. Testing the Attempt");
                         	/*Test 1, No pass*/
+                        	if( attempt.charAt(0)=='|'){
+                        		attempt = attempt.substring(1);
                         	if (password == null || password.length() == 0){
                         		if (attempt.indexOf('|') == -1){
                         			addList.add(attempt);
@@ -62,6 +76,7 @@ public class Server implements Runnable  {
                         		returnPacket = 
                         				new DatagramPacket(ByteBuffer.allocate(4).putInt(clientCount).array(), 4, returnAddr, 2333);
                         		clientCount++;   
+                        		Log.d("UDP", "S: YYYYYYYYYYES");
                         	}
                         	/*Test 2, Has pass*/
                         	else if (attempt.indexOf('|') == -1){/*Pass miss*/
@@ -87,6 +102,21 @@ public class Server implements Runnable  {
                         		}
                         	}
                         	socket.send(returnPacket);
+                        	}else{
+                        		int recvIDint = Integer.parseInt(new String(packet.getData()).split("|")[0]);
+                        		String recvDATA = new String(packet.getData()).split("|")[1]; // need optimize
+                        		byte[] toall = recvDATA.getBytes();
+                        		for(int i=0; i<clientCount; i++){
+                        			if(recvIDint == i)
+                        				continue;
+                        			InetAddress clientAddr = InetAddress.getByName(addList.get(i));
+                        			DatagramPacket packetsize = new DatagramPacket(ByteBuffer.allocate(4).putInt(toall.length).array(),4, clientAddr, 2333);
+                        			socket.send(packetsize);
+                        			packetsize = new DatagramPacket(toall, toall.length, clientAddr, 2333);
+                        			socket.send(packetsize);
+                                }
+                        		GDB_sc.reciveByteMessage(recvDATA.getBytes()); // need optimize
+                        	}
                         }
                 } catch (Exception e) {
                     Log.e("UDP", "S: Error", e);
