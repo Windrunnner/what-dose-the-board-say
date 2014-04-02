@@ -1,5 +1,7 @@
 package com.example.whatdosetheboardsay;
 
+import java.io.IOException;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -57,6 +59,13 @@ public class WorkSpaceView extends View
             mLastY = mCurrY;
             break;
         case MotionEvent.ACTION_UP:
+			try {
+				//GDB_sc.sendByteMessage(GDB_sc.getBytes(ranLine));
+				GDB_sc.getBytes(ranLine);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         	break;
         default:  
             break;  
