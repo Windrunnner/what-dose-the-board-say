@@ -1,12 +1,11 @@
 package com.example.whatdosetheboardsay;
-import java.math.BigInteger;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
-
+import android.annotation.SuppressLint;
 import android.util.Log;
  
 
@@ -35,7 +34,8 @@ public class Server implements Runnable  {
     			}
     		}
         }
-    		@Override
+    		@SuppressLint("NewApi")
+			@Override
         public void run() {
                 ServerIP = GDB_sc.GetLocalIpAddress();
                 byte[] bufsize = new byte[4];
@@ -113,13 +113,16 @@ public class Server implements Runnable  {
                         		}
                         		socket.send(returnPacket);
                         	}else{
-                        		String recvString = new String(packet.getData());
-                        		String test[] = recvString.split("\\|");
-                        		System.out.println(recvString.toString());
-                        		Log.d("UDP", Arrays.toString(test));
-                        		int recvIDint = Integer.parseInt(test[0]);                        		
-                        		String recvDATA = test[1]; // need optimize
-                        		byte[] toall = recvDATA.getBytes();
+                        		byte rvdata[] = packet.getData();
+                        	//	String recvString = new String(rvdata);
+                        	//	String test[] = recvString.split("\\|");
+                        	//	System.out.println(recvString.toString());
+                        	//	Log.d("UDP", Arrays.toString(test));
+                        		int recvIDint = rvdata[0]-'0';                       		
+                        	//	String recvDATA = test[1]; // need optimize
+                        		
+                        		byte[] toall = Arrays.copyOfRange(rvdata,2, rvdata.length);
+                        		
                         		for(int i=0; i<clientCount; i++){
                         			if(recvIDint == i)
                         				continue;
@@ -129,7 +132,7 @@ public class Server implements Runnable  {
                         			packetsize = new DatagramPacket(toall, toall.length, clientAddr, 2333);
                         			socket.send(packetsize);
                                 }
-                        		GDB_sc.reciveByteMessage(recvDATA.getBytes()); // need optimize
+                        		GDB_sc.reciveByteMessage(toall); // need optimize
                         	}
                         }
                 } catch (Exception e) {
