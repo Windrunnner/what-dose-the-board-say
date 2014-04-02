@@ -13,11 +13,11 @@ public class randomLineMsg implements Serializable
 {
 	private Vector points = new Vector();
 	private int x0, y0, x1, y1;
-	private Point point, start, end;
+	private CustomPoint point, start, end;
 	
 	public void setPoints(int x, int y)
 	{
-		point = new Point(x, y);
+		point = new CustomPoint(x, y);
 		this.points.add(point);
 	}
 	
@@ -30,13 +30,13 @@ public class randomLineMsg implements Serializable
 			return;
 		}
 		
-		start = (Point)allPoints.nextElement();
+		start = (CustomPoint)allPoints.nextElement();
 		x0 = start.x;
 		y0 = start.y;
 		
 		while(allPoints.hasMoreElements())
 		{
-			end = (Point)allPoints.nextElement();
+			end = (CustomPoint)allPoints.nextElement();
 			x1 = end.x;
 			y1 = end.y;
 			canvas.drawLine(x0, y0, x1, y1, p);

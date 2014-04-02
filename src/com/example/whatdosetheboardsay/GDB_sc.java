@@ -46,10 +46,10 @@ public class GDB_sc implements Serializable{
 		ByteArrayOutputStream bout = new ByteArrayOutputStream();
 		ObjectOutputStream out = new ObjectOutputStream(bout);
 		out.writeObject(obj);
-		out.flush();
 		byte[] bytes = bout.toByteArray();
 		bout.close();
 		out.close();
+		System.out.println("\nGG\n");
 		
 		return bytes;
 	}
