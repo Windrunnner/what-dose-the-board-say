@@ -41,7 +41,7 @@ public class JoinBoard implements Runnable {
 	            GDB_sc.socket.send(packet);
 	            Log.d("UDP", "C: Done.");
 	            DatagramPacket returnPacket = new DatagramPacket(bufsize , 4);
-	            GDB_sc.socket.setSoTimeout(2500); 
+	            GDB_sc.socket.setSoTimeout(10000); 
 	            GDB_sc.socket.receive(returnPacket);
 	            GDB_sc.socket.setSoTimeout(0); 
 	            Log.d("UDP", "C: Recieved");
@@ -80,7 +80,7 @@ public class JoinBoard implements Runnable {
             Log.d("UDP", "C: Sending: data '" + new String(buf) + "'");
             GDB_sc.socket.send(packet);
             Log.d("UDP", "C: Done.");
-            GDB_sc.socket.setSoTimeout(2500); 
+            GDB_sc.socket.setSoTimeout(10000); 
             GDB_sc.socket.receive(returnPacket);
             GDB_sc.socket.setSoTimeout(0); 
             JoinInterface_activity.uid = ByteBuffer.wrap(bufsize).getInt();

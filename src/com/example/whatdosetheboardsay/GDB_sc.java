@@ -45,7 +45,7 @@ public class GDB_sc {
 
 	public static void reciveByteMessage(byte[] msg){
 		//call other functions or s.t
-		Log.d("GDBR", EncryptUtil.byte2hex(msg));
+		Log.d("GDBR", new String(msg));
 	}
 	
 	public static void SetServerIpAddress(String adr){
