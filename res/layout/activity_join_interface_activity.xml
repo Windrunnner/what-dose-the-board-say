@@ -12,8 +12,10 @@
         android:id="@+id/passtext"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText2"
+        android:layout_alignRight="@+id/iptext"
+        android:layout_below="@+id/ipedit"
         android:layout_centerVertical="true"
+        android:layout_marginTop="23dp"
         android:ems="10"
         android:text="Please Enter the Password:" />
 
@@ -22,8 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/passtext"
-        android:layout_below="@+id/passtext"
-        android:layout_marginTop="23dp"
+        android:layout_below="@+id/passtext" 
         android:ems="10" />
 
     <TextView
@@ -32,7 +33,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="194dp"
         android:layout_marginTop="83dp"
         android:ems="10"
         android:text="Please Enter the IP:" />

@@ -6,6 +6,8 @@ import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.Enumeration;
 
+import android.util.Log;
+
 public class GDB_sc {
 	// http://silverballsoftware.com/get-your-ip-address-android-code
 	private static String ServerIP = "127.0.0.1";
@@ -43,6 +45,7 @@ public class GDB_sc {
 
 	public static void reciveByteMessage(byte[] msg){
 		//call other functions or s.t
+		Log.d("GDBR", EncryptUtil.byte2hex(msg));
 	}
 	
 	public static void SetServerIpAddress(String adr){

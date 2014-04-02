@@ -41,7 +41,9 @@ public class JoinBoard implements Runnable {
 	            GDB_sc.socket.send(packet);
 	            Log.d("UDP", "C: Done.");
 	            DatagramPacket returnPacket = new DatagramPacket(bufsize , 4);
+	            GDB_sc.socket.setSoTimeout(2500); 
 	            GDB_sc.socket.receive(returnPacket);
+	            GDB_sc.socket.setSoTimeout(0); 
 	            Log.d("UDP", "C: Recieved");
 	            JoinInterface_activity.uid = ByteBuffer.wrap(bufsize).getInt();
 	        	synchronized (JoinInterface_activity.joinThread) {
@@ -68,7 +70,7 @@ public class JoinBoard implements Runnable {
         	Log.d("UDP", "C: Connecting... to " + serverIP);
         	GDB_sc.socket = new DatagramSocket(2333, localAddr);
         	Log.d("UDP", "C: CheckPoint");
-        	byte[] buf = ("|"+GDB_sc.GetLocalIpAddress() + "|" + password).getBytes();
+        	byte[] buf = ("|"+GDB_sc.GetLocalIpAddress() + "|" + EncryptUtil.encrypt(GDB_sc.GetLocalIpAddress()+password, EncryptUtil.SHA1)).getBytes();
             DatagramPacket packet = new DatagramPacket(ByteBuffer.allocate(4).putInt(buf.length).array(),4, serverAddr, 2333);
             byte[] bufsize = new byte[4];
 			DatagramPacket returnPacket = new DatagramPacket(bufsize , 4);
@@ -78,7 +80,9 @@ public class JoinBoard implements Runnable {
             Log.d("UDP", "C: Sending: data '" + new String(buf) + "'");
             GDB_sc.socket.send(packet);
             Log.d("UDP", "C: Done.");
+            GDB_sc.socket.setSoTimeout(2500); 
             GDB_sc.socket.receive(returnPacket);
+            GDB_sc.socket.setSoTimeout(0); 
             JoinInterface_activity.uid = ByteBuffer.wrap(bufsize).getInt();
         	synchronized (JoinInterface_activity.joinThread) {
         		JoinInterface_activity.joinThread.notify();
