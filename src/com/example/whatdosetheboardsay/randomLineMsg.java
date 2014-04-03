@@ -5,23 +5,27 @@ import java.util.Enumeration;
 import java.util.Vector;
 
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Point;
 
 public class randomLineMsg implements Serializable
 {
-	private Vector points = new Vector();
+	//private Paint myPaint;
+	private Vector<Integer> points;
 	private int x0, y0, x1, y1;
-	private CustomPoint point, start, end;
+	
+	public randomLineMsg(Paint p)
+	{
+		//myPaint = p;
+		points = new Vector<Integer>();
+	}
 	
 	public void setPoints(int x, int y)
 	{
-		point = new CustomPoint(x, y);
-		this.points.add(point);
+		points.add(x);
+		points.add(y);
 	}
 	
-	public void paint(Paint p, Canvas canvas)
+	public void paint(Canvas canvas, Paint p)
 	{
 		Enumeration allPoints = points.elements();
 		
@@ -30,34 +34,33 @@ public class randomLineMsg implements Serializable
 			return;
 		}
 		
-		start = (CustomPoint)allPoints.nextElement();
-		x0 = start.x;
-		y0 = start.y;
+		x0 = (Integer)allPoints.nextElement();
+		
+		if (!allPoints.hasMoreElements())
+		{
+			return;
+		}
+		
+		y0 = (Integer)allPoints.nextElement();
 		
 		while(allPoints.hasMoreElements())
 		{
-			end = (CustomPoint)allPoints.nextElement();
-			x1 = end.x;
-			y1 = end.y;
+			x1 = (Integer)allPoints.nextElement();
+			
+			if (!allPoints.hasMoreElements())
+			{
+				return;
+			}
+			
+			y1 = (Integer)allPoints.nextElement();
 			canvas.drawLine(x0, y0, x1, y1, p);
 			x0 = x1;
 			y0 = y1;
 		}
 	}
 	
-	public void print()
+	public void clear()
 	{
-		Enumeration allPoints = points.elements();
-		Point temp;
-		
-		temp = (Point)allPoints.nextElement();
-		int i = 0;
-		
-		while (allPoints.hasMoreElements())
-		{
-			System.out.println("Point" + i + ": " + "(" + temp.x + ", " + temp.y + ")");
-			temp = (Point)allPoints.nextElement();
-			i++;
-		}
+		points.clear();
 	}
 }

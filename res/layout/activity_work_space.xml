@@ -9,6 +9,7 @@
     tools:context=".WorkSpaceActivity" >
 
     <view class="com.example.whatdosetheboardsay.WorkSpaceView"
+        android:id="@+id/workSpaceView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 

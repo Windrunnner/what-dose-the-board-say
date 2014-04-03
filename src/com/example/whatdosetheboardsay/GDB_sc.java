@@ -1,7 +1,9 @@
 package com.example.whatdosetheboardsay;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.net.DatagramSocket;
@@ -11,12 +13,14 @@ import java.net.SocketException;
 import java.util.Enumeration;
 
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
 
 public class GDB_sc implements Serializable{
 	// http://silverballsoftware.com/get-your-ip-address-android-code
 	private static String ServerIP = "127.0.0.1";
 	static DatagramSocket socket;
-	private static boolean isServer;
+	private static boolean isServer = true;
 	public static String GetLocalIpAddress()
     {
         try {
@@ -46,17 +50,28 @@ public class GDB_sc implements Serializable{
 		ByteArrayOutputStream bout = new ByteArrayOutputStream();
 		ObjectOutputStream out = new ObjectOutputStream(bout);
 		out.writeObject(obj);
+		out.flush();
 		byte[] bytes = bout.toByteArray();
 		bout.close();
 		out.close();
-		System.out.println("\nGG\n");
 		
 		return bytes;
 	}
 	
+	public static Object getObject(byte[] bytes) throws IOException, ClassNotFoundException
+	{
+		ByteArrayInputStream bi = new ByteArrayInputStream(bytes);
+		ObjectInputStream oi = new ObjectInputStream(bi);
+		Object obj = oi.readObject();
+		bi.close();
+		oi.close();
+		
+		return obj;
+	}
+	
 	public static void sendByteMessage(byte[] msg){
 		if(isServer)
-			MainActivity.server.sendMessage(msg);
+			CreateInterfaceActivity.server.sendMessage(msg);
 		else
 			MainActivity.client.sendMessage(msg);
 	}
@@ -64,6 +79,16 @@ public class GDB_sc implements Serializable{
 	public static void reciveByteMessage(byte[] msg){
 		//call other functions or s.t
 		System.out.println("GDB!!!\n");
+		try {
+			WorkSpaceView.messageReceived(getObject(msg));
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		Log.d("GDBR", new String(msg));
 	}
 	
