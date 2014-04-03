@@ -1,12 +1,14 @@
 package com.example.whatdosetheboardsay;
 
 import java.io.IOException;
-import java.util.Vector;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -18,28 +20,43 @@ public class WorkSpaceView extends View
 	private static boolean flag = false;
     private MainframeActivity mMainframActivity;
     private static randomLineMsg receivedRanLine = null;
-    private static WorkSpaceView current = null;
     private randomLineMsg ranLine;
+    public static WorkSpaceView mWorkSpaceView = null;
       
     private Bitmap mBitmap;  //保存每次绘画的结果  
     private Paint mPaint;
+    private Handler messageHandler;
+    public static Context mContext;
       
     public WorkSpaceView(Context context, AttributeSet attrs) {  
-        super(context, attrs);  
-        current = this;
+        super(context, attrs);
+        
+        if (mWorkSpaceView == null)
+        {
+        	mWorkSpaceView = this;
+        }
+        
+        Looper looper = Looper.myLooper();
+        messageHandler = new MessageHandler(looper);
+        
         ranLine = new randomLineMsg(mPaint);
+        mContext = context;
         mPaint = new Paint();  
         mPaint.setStrokeWidth(2);
     }  
     
-    public static void messageReceived(Object obj)
+    public void messageReceived(Object obj)
     {
     	if (obj instanceof randomLineMsg)
     	{
     		System.out.println("Great Chen BABA!!!");
     		receivedRanLine = ((randomLineMsg) obj);
     		flag = true;
-    		//current.invalidate();
+    		
+    		Message message = Message.obtain();
+    		message.obj = receivedRanLine;
+    		messageHandler.sendMessage(message);
+    		//invalidate();
     	}
     }
   
@@ -101,4 +118,18 @@ public class WorkSpaceView extends View
   
         return true; //必须返回true  
     }
+}
+
+class MessageHandler extends Handler
+{
+	public MessageHandler(Looper looper)
+	{
+		super(looper);
+	}
+	
+	@Override
+	public void handleMessage(Message msg)
+	{
+		WorkSpaceView.mWorkSpaceView.invalidate();
+	}
 }
