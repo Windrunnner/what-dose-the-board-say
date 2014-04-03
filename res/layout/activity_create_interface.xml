@@ -17,16 +17,15 @@
 
     <TextView
         android:id="@+id/createTxt"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="30dp"
         android:text="Create"
-        android:textColor="@id/createTxt"
+        android:textColor="#000000"
         android:textSize="25dp" 
-        android:typeface="serif"
         />
 
     <TextView
@@ -38,9 +37,8 @@
         android:layout_marginLeft="150dp"
         android:layout_marginTop="100dp"
         android:text="Your IP address:"
-        android:textColor="#33B5E5"
+        android:textColor="#000000"
         android:textSize="20dp" 
-        android:typeface="serif"
         />
 
     <TextView
@@ -54,7 +52,6 @@
         android:text="Set up password:"
         android:textColor="#000000"
         android:textSize="20dp" 
-        android:typeface="serif"
         />
 
     <TextView
@@ -68,7 +65,6 @@
         android:text="Invite:"
         android:textColor="#000000"
         android:textSize="20dp" 
-        android:typeface="serif"
         />
 <!-- 
     <Button
