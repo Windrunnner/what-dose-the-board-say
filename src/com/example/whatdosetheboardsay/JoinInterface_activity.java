@@ -57,7 +57,6 @@ public class JoinInterface_activity extends Activity {
     		new Thread(MainActivity.client).start();
         	Intent intent = new Intent(this, MainframeActivity.class);
       	  	startActivity(intent);
-      	  	GDB_sc.sendByteMessage(new String("assassIN").getBytes());
     	}
 	}
 

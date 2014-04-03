@@ -19,8 +19,8 @@ import android.util.Log;
 				ByteBuffer target = ByteBuffer.wrap(buf);
 				target.put(prepend.getBytes());
 				target.put(toall);
-				synchronized (MainActivity.client) {
-					MainActivity.client.notify();
+				synchronized (this) {
+					this.notify();
 		    	}
 			}
 		    @Override
@@ -35,8 +35,8 @@ import android.util.Log;
 	                    	Clientrv = new Clientrvmsg() ;
 	                		new Thread(Clientrv).start();
 	                		while(true){
-	                    		synchronized (MainActivity.client) {
-	                    			MainActivity.client.wait();
+	                    		synchronized (this) {
+	                    			this.wait();
 	                    		}
 	                    	//	str = JoinInterface_activity.uid + "|" + str;
 	                    		Log.d("UDP", "C: CheckPoint");
