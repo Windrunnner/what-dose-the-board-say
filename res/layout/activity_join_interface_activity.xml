@@ -9,61 +9,76 @@
     tools:context=".JoinInterface_activity" >
 
     <TextView
-        android:id="@+id/passtext"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/iptext"
-        android:layout_below="@+id/ipedit"
-        android:layout_centerVertical="true"
-        android:layout_marginTop="23dp"
-        android:ems="10"
-        android:text="Please Enter the Password:" />
-
-    <EditText
-        android:id="@+id/passedit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/passtext"
-        android:layout_below="@+id/passtext" 
-        android:ems="10" />
-
-    <TextView
-        android:id="@+id/iptext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="83dp"
-        android:ems="10"
-        android:text="Please Enter the IP:" />
-
-    <TextView
         android:id="@+id/jointext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="28dp"
-        android:ems="10"
-        android:text="Join the board " />
-
-    <EditText
-        android:id="@+id/ipedit"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"
+        android:text="Join"
+        android:textColor="#000000"
+        android:textSize="25dp" />
+    
+     <TextView
+        android:id="@+id/iptext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/iptext"
-        android:layout_below="@+id/iptext"
-        android:ems="10" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="100dp"
+        android:text="Please enter the IP address:"
+        android:textColor="#000000"
+        android:textSize="20dp" />
+     
+    <TextView
+        android:id="@+id/passtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="180dp"
+        android:text="Please enter the password:"
+        android:textColor="#000000"
+        android:textSize="20dp" />
 
+    
+    
+    
     <Button
         android:id="@+id/joinButton_join"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="31dp"
-        android:layout_marginRight="117dp"
+        android:layout_alignTop="@+id/backButton"
+        android:layout_marginLeft="800dp"
+        android:text="JOIN" 
         android:onClick="tryJoin"
-        android:text="JOIN" />
+        android:textSize="25dp"/>
+
+    <EditText
+       android:id="@+id/passedit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/passtext"
+        android:layout_below="@+id/passtext"
+        android:ems="27"
+        android:editable="true"
+        android:inputType="textPassword" >
+        <requestFocus />
+    </EditText>
+
+    <EditText
+         android:id="@+id/ipedit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/iptext"
+        android:layout_below="@+id/iptext"
+        android:editable="true"
+        android:ems="27" >
+      </EditText>   
 
 </RelativeLayout>
+
