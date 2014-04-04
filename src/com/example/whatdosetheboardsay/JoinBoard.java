@@ -2,6 +2,7 @@ package com.example.whatdosetheboardsay;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 
 import android.util.Log;
@@ -29,7 +30,10 @@ public class JoinBoard implements Runnable {
 	    		InetAddress serverAddr = InetAddress.getByName(serverIP);
 	    		InetAddress localAddr = InetAddress.getByName(GDB_sc.GetLocalIpAddress());
 	        	Log.d("UDP", "C: Connecting... to " + serverIP);
-	        	GDB_sc.socket = new DatagramSocket(2333, localAddr);
+	        	//GDB_sc.socket = new DatagramSocket(2333);
+	        	GDB_sc.socket = new DatagramSocket(null);
+	        	GDB_sc.socket.setReuseAddress(true);
+	        	GDB_sc.socket.bind(new InetSocketAddress(2333));
 	        	Log.d("UDP", "C: CheckPoint");
 	        	byte[] buf = ("|"+GDB_sc.GetLocalIpAddress()).getBytes();
 	            DatagramPacket packet = new DatagramPacket(ByteBuffer.allocate(4).putInt(buf.length).array(),4, serverAddr, 2333);
@@ -68,7 +72,10 @@ public class JoinBoard implements Runnable {
     		InetAddress serverAddr = InetAddress.getByName(serverIP);
     		InetAddress localAddr = InetAddress.getByName(GDB_sc.GetLocalIpAddress());
         	Log.d("UDP", "C: Connecting... to " + serverIP);
-        	GDB_sc.socket = new DatagramSocket(2333, localAddr);
+        	//GDB_sc.socket = new DatagramSocket(2333);
+        	GDB_sc.socket = new DatagramSocket(null);
+        	GDB_sc.socket.setReuseAddress(true);
+        	GDB_sc.socket.bind(new InetSocketAddress(2333));
         	Log.d("UDP", "C: CheckPoint");
         	byte[] buf = ("|"+GDB_sc.GetLocalIpAddress() + "|" + EncryptUtil.encrypt(GDB_sc.GetLocalIpAddress()+password, EncryptUtil.SHA1)).getBytes();
             DatagramPacket packet = new DatagramPacket(ByteBuffer.allocate(4).putInt(buf.length).array(),4, serverAddr, 2333);
