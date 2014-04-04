@@ -18,7 +18,6 @@ public class WorkSpaceView extends View
 {
 	private int mLastX, mLastY;
 	private int mCurrX, mCurrY;
-	private static boolean flag = false;
 	private static RandomLineMsg ranLine;
     private static RandomLineMsg receivedRanLine = null;
     public static WorkSpaceView mWorkSpaceView = null;
@@ -29,6 +28,8 @@ public class WorkSpaceView extends View
     public static int mMode;
     public static int mColor;
     public static int mSize;
+	private static boolean isRanLine;
+    public static boolean isClean;
       
     public WorkSpaceView(Context context, AttributeSet attrs) {  
         super(context, attrs);
@@ -44,6 +45,8 @@ public class WorkSpaceView extends View
         mMode = MainframeActivity.MODE_PENCIL;
         mColor = Color.BLACK;
         mSize = 2;
+        isRanLine = false;
+        isClean = false;
         
         ranLine = new RandomLineMsg(mColor, mSize);
         
@@ -58,10 +61,21 @@ public class WorkSpaceView extends View
     	{
     		System.out.println("Great Chen BABA!!!");
     		receivedRanLine = ((RandomLineMsg) obj);
-    		flag = true;
+    		isRanLine = true;
     		
     		Message message = Message.obtain();
     		message.obj = receivedRanLine;
+    		messageHandler.sendMessage(message);
+    	}
+    	
+    	if (obj instanceof CleanMsg)
+    	{
+    		System.out.println("Great Chen BABA!!!");
+    		CleanMsg cleanMsg = (CleanMsg) obj;
+    		isClean = true;
+    		
+    		Message message = Message.obtain();
+    		message.obj = cleanMsg;
     		messageHandler.sendMessage(message);
     	}
     }
@@ -80,10 +94,15 @@ public class WorkSpaceView extends View
         //先将结果画到Bitmap上  
         Canvas tmpCanvas = new Canvas(mBitmap);
         
-        if (flag == true)
+        if(isRanLine)
         {
         	receivedRanLine.paint(tmpCanvas);
-        	flag = false;
+        	isRanLine = false;
+        }
+        else if (isClean)
+        {
+        	mBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        	isClean = false;
         }
         else
         {

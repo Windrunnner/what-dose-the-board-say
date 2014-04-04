@@ -7,6 +7,8 @@ package com.example.whatdosetheboardsay;
  * @author Zhuo Chen, Yik Fei Wong
  *
  */
+import java.io.IOException;
+
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -45,6 +47,17 @@ public class MainframeActivity extends Activity {
     	WorkSpaceView.mColor = Color.WHITE;
     	WorkSpaceView.mPaint.setColor(WorkSpaceView.mColor);
     	WorkSpaceView.mPaint.setStrokeWidth(WorkSpaceView.mSize);
+    }
+	
+	public void cleanClick(View view) {
+    	IMessage cleanMsg = new CleanMsg();
+    	WorkSpaceView.mWorkSpaceView.messageReceived(cleanMsg);
+    	try {
+			GDB_sc.sendByteMessage(GDB_sc.getBytes(cleanMsg));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
 }

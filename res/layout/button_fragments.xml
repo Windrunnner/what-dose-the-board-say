@@ -81,6 +81,7 @@
         android:layout_alignLeft="@+id/save_button"
         android:layout_alignRight="@+id/save_button"
         android:layout_below="@+id/save_button"
+        android:onClick="cleanClick"
         android:text="Clean" />
 
     <Button
