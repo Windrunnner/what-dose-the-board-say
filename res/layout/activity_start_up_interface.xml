@@ -2,35 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/wtdbs5"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="#FFFFFF"
     tools:context=".StartUpInterfaceActivity" >
-
-    <Button
-        android:id="@+id/start_join_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="129dp"
-        android:textSize="25sp"
-        android:onClick="toJoin"
-        android:text="Join a Board" />
-
-    <Button
-        android:id="@+id/start_create_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/start_join_button"
-        android:layout_alignLeft="@+id/start_join_button"
-        android:layout_alignRight="@+id/start_join_button"
-        android:onClick="toCreate"
-        android:layout_marginBottom="24dp"
-        android:text="Create New"
-        android:textSize="25sp" />
 
     <TextView
         android:id="@+id/start_up_textview"
@@ -41,13 +18,40 @@
         android:layout_marginBottom="128dp"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <ImageView
-        android:id="@+id/avatar_image_start"
-        android:layout_width="800dip"
-        android:layout_height="800dp"
-        android:layout_above="@+id/start_create_button"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="35dp"
-        android:contentDescription="The Logo" />
-   
+    <Button
+        android:id="@+id/start_create_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="146dp"
+        android:layout_marginTop="70dp"
+        android:background="@drawable/selfbuttona"
+        android:onClick="toCreate"
+        android:shadowColor="#182B36"
+        android:shadowDx="3"
+        android:shadowDy="3"
+        android:shadowRadius="5"
+        android:text="Create New"
+        android:textColor="#0C1A70"
+        android:textSize="25sp" />
+
+    <Button
+        android:id="@+id/start_join_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/start_create_button"
+        android:layout_below="@+id/start_create_button"
+        android:layout_marginLeft="67dp"
+        android:layout_marginTop="23dp"
+        android:background="@drawable/selfbuttona"
+        android:onClick="toJoin"
+        android:shadowColor="#182B36"
+        android:shadowDx="3"
+        android:shadowDy="3"
+        android:shadowRadius="5"
+        android:text="Join a Board"
+        android:textColor="#0C1A70"
+        android:textSize="25sp" />
+
 </RelativeLayout>

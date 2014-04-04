@@ -57,6 +57,12 @@
         android:layout_marginLeft="800dp"
         android:text="JOIN" 
         android:onClick="tryJoin"
+        android:background="@drawable/selfbuttonjoincreate"
+        android:shadowColor="#182B36"
+        android:shadowDx="3"
+        android:shadowDy="3"
+        android:shadowRadius="5"
+        android:textColor="#0C1A70"
         android:textSize="25dp"/>
 
     <EditText

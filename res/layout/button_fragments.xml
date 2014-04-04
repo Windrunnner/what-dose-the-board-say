@@ -12,10 +12,11 @@
 
     <Button
         android:id="@+id/userManage_button"
-        android:layout_width="wrap_content"
+        android:layout_width="128dp"
         android:layout_height="35dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
+        android:background="@drawable/textbuttons"
         android:text="User Manage" />
 
     <Button
@@ -25,6 +26,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignRight="@+id/userManage_button"
         android:layout_below="@+id/userManage_button"
+        android:background="@drawable/buttonsettings"
         android:text="Settings" />
     
     <Button
@@ -35,15 +37,14 @@
         android:layout_alignRight="@+id/userManage_button"
         android:layout_below="@+id/setting_button"
         android:onClick="pencilClick"
+        android:background="@drawable/penbutton"
         android:text="Pencil" />
 
     <Button
         android:id="@+id/eraser_button"
         android:layout_width="128dp"
         android:layout_height="35dp"
-        android:layout_alignLeft="@+id/pen_button"
-        android:layout_alignRight="@+id/pen_button"
-        android:layout_below="@+id/pen_button"
+        android:background="@drawable/buttoneraser"
         android:onClick="eraserClick"
         android:text="Eraser" />
 
@@ -54,6 +55,7 @@
         android:layout_alignLeft="@+id/pen_button"
         android:layout_alignRight="@+id/pen_button"
         android:layout_below="@+id/eraser_button"
+        android:background="@drawable/textbuttons"
         android:text="Text" />
 
     <Button
@@ -63,6 +65,7 @@
         android:layout_alignLeft="@+id/text_button"
         android:layout_alignRight="@+id/text_button"
         android:layout_below="@+id/text_button"
+        android:background="@drawable/buttonimage"
         android:text="Image" />
 
     <Button
@@ -72,6 +75,7 @@
         android:layout_alignLeft="@+id/image_button"
         android:layout_alignRight="@+id/image_button"
         android:layout_below="@+id/image_button"
+        android:background="@drawable/buttonsave"
         android:text="Save" />
 
     <Button
@@ -82,6 +86,7 @@
         android:layout_alignRight="@+id/save_button"
         android:layout_below="@+id/save_button"
         android:onClick="cleanClick"
+        android:background="@drawable/textbuttons"
         android:text="Clean" />
 
     <Button
@@ -91,6 +96,7 @@
         android:layout_alignLeft="@+id/clean_button"
         android:layout_alignRight="@+id/clean_button"
         android:layout_below="@+id/clean_button"
+        android:background="@drawable/textbuttons"
         android:text="Mode" />
 
     <Button
@@ -98,22 +104,25 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:text="Undo" />
+        android:background="@drawable/buttonback"
+        />
 
     <Button
         android:id="@+id/redo_button"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:text="Redo" />
+        android:background="@drawable/buttonfor"
+        />
 
     <Button
         android:id="@+id/voice_button"
-        android:layout_width="wrap_content"
+        android:layout_width="128dp"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/undo_button"
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/redo_button"
+        android:background="@drawable/textbuttons"
         android:text="Voice:On/Off" />
 
 </LinearLayout>
