@@ -7,6 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#FFFFFF"
     tools:context=".ButtonFragmentsActivity" >
 
     <Button
@@ -33,6 +34,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignRight="@+id/userManage_button"
         android:layout_below="@+id/setting_button"
+        android:onClick="pencilClick"
         android:text="Pencil" />
 
     <Button
@@ -42,6 +44,7 @@
         android:layout_alignLeft="@+id/pen_button"
         android:layout_alignRight="@+id/pen_button"
         android:layout_below="@+id/pen_button"
+        android:onClick="eraserClick"
         android:text="Eraser" />
 
     <Button

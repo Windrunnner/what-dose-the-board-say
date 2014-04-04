@@ -5,6 +5,7 @@ import java.io.IOException;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Handler;
 import android.os.Looper;
@@ -18,15 +19,16 @@ public class WorkSpaceView extends View
 	private int mLastX, mLastY;
 	private int mCurrX, mCurrY;
 	private static boolean flag = false;
-    private MainframeActivity mMainframActivity;
-    private static randomLineMsg receivedRanLine = null;
-    private randomLineMsg ranLine;
+	private static RandomLineMsg ranLine;
+    private static RandomLineMsg receivedRanLine = null;
     public static WorkSpaceView mWorkSpaceView = null;
       
     private Bitmap mBitmap;  //保存每次绘画的结果  
-    private Paint mPaint;
     private Handler messageHandler;
-    public static Context mContext;
+    public static Paint mPaint;
+    public static int mMode;
+    public static int mColor;
+    public static int mSize;
       
     public WorkSpaceView(Context context, AttributeSet attrs) {  
         super(context, attrs);
@@ -39,24 +41,28 @@ public class WorkSpaceView extends View
         Looper looper = Looper.myLooper();
         messageHandler = new MessageHandler(looper);
         
-        ranLine = new randomLineMsg(mPaint);
-        mContext = context;
-        mPaint = new Paint();  
-        mPaint.setStrokeWidth(2);
+        mMode = MainframeActivity.MODE_PENCIL;
+        mColor = Color.BLACK;
+        mSize = 2;
+        
+        ranLine = new RandomLineMsg(mColor, mSize);
+        
+        mPaint = new Paint();
+        mPaint.setColor(mColor);
+        mPaint.setStrokeWidth(mSize);
     }  
     
     public void messageReceived(Object obj)
     {
-    	if (obj instanceof randomLineMsg)
+    	if (obj instanceof RandomLineMsg)
     	{
     		System.out.println("Great Chen BABA!!!");
-    		receivedRanLine = ((randomLineMsg) obj);
+    		receivedRanLine = ((RandomLineMsg) obj);
     		flag = true;
     		
     		Message message = Message.obtain();
     		message.obj = receivedRanLine;
     		messageHandler.sendMessage(message);
-    		//invalidate();
     	}
     }
   
@@ -76,7 +82,7 @@ public class WorkSpaceView extends View
         
         if (flag == true)
         {
-        	receivedRanLine.paint(tmpCanvas, mPaint);
+        	receivedRanLine.paint(tmpCanvas);
         	flag = false;
         }
         else
@@ -89,7 +95,7 @@ public class WorkSpaceView extends View
       
     @Override  
     public boolean onTouchEvent(MotionEvent event) {
-    	randomLineMsg temp = null;
+        ranLine.update();
     	mLastX = mCurrX;
     	mLastY = mCurrY;
     	mCurrX = (int)event.getX();

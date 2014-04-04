@@ -8,10 +8,14 @@ package com.example.whatdosetheboardsay;
  *
  */
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.view.View;
 
 public class MainframeActivity extends Activity {
+	public static final int MODE_PENCIL = 0;
+	public static final int MODE_ERASER = 1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -26,5 +30,21 @@ public class MainframeActivity extends Activity {
 		getMenuInflater().inflate(R.menu.mainframe, menu);
 		return true;
 	}*/
+	
+	public void pencilClick(View view) {
+    	WorkSpaceView.mMode = MainframeActivity.MODE_PENCIL;
+    	WorkSpaceView.mSize = 2;
+    	WorkSpaceView.mColor = Color.BLACK;
+    	WorkSpaceView.mPaint.setColor(WorkSpaceView.mColor);
+    	WorkSpaceView.mPaint.setStrokeWidth(WorkSpaceView.mSize);
+    }
+	
+	public void eraserClick(View view) {
+    	WorkSpaceView.mMode = MainframeActivity.MODE_ERASER;
+    	WorkSpaceView.mSize = 50;
+    	WorkSpaceView.mColor = Color.WHITE;
+    	WorkSpaceView.mPaint.setColor(WorkSpaceView.mColor);
+    	WorkSpaceView.mPaint.setStrokeWidth(WorkSpaceView.mSize);
+    }
 
 }
