@@ -14,10 +14,37 @@ public class Server implements Runnable {
 
 	public static String ServerIP = "127.0.0.1";
 	public static ArrayList<String> addList = new ArrayList<String>();
+	public static ArrayList<Integer> badID = new ArrayList<Integer>();
 	public static int clientCount = 0;
 	public static String password = null;
 	public static DatagramSocket socket;
 	public static ServerSendMsg ssm;
+	public void SetPremit(int clientID, int YesNo){
+		if(YesNo==1){
+			badID.add(clientID);
+		}else{
+			try{
+				badID.remove(clientID);
+			}catch(Exception e){
+				return;
+			}
+		}
+	}
+	public int GetClientCount(){
+		return clientCount;
+	}
+	
+	public int[] GetClientPremit(){
+		if(clientCount==0)
+			return null;
+		int[] rev = new int[clientCount];
+		for(int i=0; i<clientCount; i++)
+			if(badID.contains(i))
+				rev[i] = 0;
+			else
+				rev[i] = 1;
+		return rev;
+	}
 	
 	@SuppressLint("NewApi")
 	@Override
@@ -118,7 +145,8 @@ public class Server implements Runnable {
 					byte rvdata[] = packet.getData();
 					int recvIDint = rvdata[0] - '0';
 					byte[] toall = Arrays.copyOfRange(rvdata, 2, rvdata.length);
-
+					if(badID.contains(recvIDint))
+						continue;
 					for (int i = 0; i < clientCount; i++) {
 						if (recvIDint == i)
 							continue;
