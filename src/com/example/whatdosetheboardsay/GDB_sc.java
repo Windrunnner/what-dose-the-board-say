@@ -45,6 +45,10 @@ public class GDB_sc implements Serializable{
 		isServer = false;
 	}
 	
+	public static boolean getIsServer(){
+		return isServer;
+	}
+	
 	public static byte[] getBytes(Object obj) throws IOException
 	{
 		ByteArrayOutputStream bout = new ByteArrayOutputStream();
