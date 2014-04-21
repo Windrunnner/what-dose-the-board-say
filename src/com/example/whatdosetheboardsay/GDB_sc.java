@@ -79,7 +79,29 @@ public class GDB_sc implements Serializable{
 		else
 			MainActivity.client.sendMessage(msg);
 	}
+	
+	public static int SetPremit(int clientID, int YesNo){
+		if(isServer){
+			CreateInterfaceActivity.server.SetPremit(clientID,YesNo);
+			return 0;
+		}
+		return -1;
+	}
 
+	public static int GetClientCount(){
+		if(isServer){
+			return CreateInterfaceActivity.server.GetClientCount();
+		}
+		return -1;
+	}
+	
+	public static int[] GetClientPremit(){
+		if(isServer){
+			return CreateInterfaceActivity.server.GetClientPremit();
+		}
+		return null;
+	}
+	
 	public static void reciveByteMessage(byte[] msg){
 		//call other functions or s.t
 		System.out.println("GDB!!!\n");
