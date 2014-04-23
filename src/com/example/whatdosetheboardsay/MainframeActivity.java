@@ -22,20 +22,27 @@ import android.widget.Toast;
 public class MainframeActivity extends Activity {
 	public static final int MODE_PENCIL = 0;
 	public static final int MODE_ERASER = 1;
+	public int buttonflag = 0;
 	Button penbutton;
+	Button eraserbutton;
 	final static int pensize_S = 0;
 	final static int pensize_M = 1;
 	final static int pensize_L = 2;
 	final static int pencolor1 = 3;
 	final static int pencolor2 = 4;
 	final static int pencolordef = 5;
+	final static int erasersizeS = 11;
+	final static int erasersizeM = 12;
+	final static int erasersizeL = 13;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_mainframe);
 		penbutton = (Button)findViewById(R.id.pen_button);
+		eraserbutton = (Button)findViewById(R.id.eraser_button);
 		registerForContextMenu(penbutton);
+		registerForContextMenu(eraserbutton);
 	}
 
 /*	@Override
@@ -51,18 +58,26 @@ public class MainframeActivity extends Activity {
     	WorkSpaceView.mColor = Color.BLACK;
     	WorkSpaceView.mPaint.setColor(WorkSpaceView.mColor);
     	WorkSpaceView.mPaint.setStrokeWidth(WorkSpaceView.mSize);
+    	buttonflag = 0;
     	
     	
     }
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo){
 		super.onCreateContextMenu(menu, v, menuInfo);
+		if(buttonflag == 0){
 		menu.add(0, pensize_S, 0, "small");
 		menu.add(0, pensize_M, 0, "medium");
 		menu.add(0, pensize_L, 0, "larger");
 		menu.add(0, pencolor1, 0, "red");
 		menu.add(0, pencolor2, 0, "blue");
 		menu.add(0, pencolordef, 0, "default");
+		}
+		if(buttonflag == 1){
+		menu.add(0, erasersizeS, 0, "small");
+		menu.add(0, erasersizeM, 0, "medium");
+		menu.add(0, erasersizeL, 0, "larger");
+		}
 	}
 	
 	@Override
@@ -100,7 +115,23 @@ public class MainframeActivity extends Activity {
 	    	WorkSpaceView.mPaint.setColor(WorkSpaceView.mColor);
 	    	WorkSpaceView.mPaint.setStrokeWidth(WorkSpaceView.mSize);
 	    	break;
+		case erasersizeS:
+			Toast.makeText(this, "You chose small eraser size", Toast.LENGTH_LONG).show();
+			WorkSpaceView.mSize = 15;
+			WorkSpaceView.mPaint.setStrokeWidth(WorkSpaceView.mSize);
+			break;
+		case erasersizeM:
+			Toast.makeText(this, "You chose medium eraser size", Toast.LENGTH_LONG).show();
+			WorkSpaceView.mSize = 30;
+			WorkSpaceView.mPaint.setStrokeWidth(WorkSpaceView.mSize);
+			break;
+		case erasersizeL:
+			Toast.makeText(this, "You chose Large eraser size", Toast.LENGTH_LONG).show();
+			WorkSpaceView.mSize = 50;
+			WorkSpaceView.mPaint.setStrokeWidth(WorkSpaceView.mSize);
+			break;
 		}
+		
 		return super.onContextItemSelected(item);
 	}
 	
@@ -111,6 +142,7 @@ public class MainframeActivity extends Activity {
     	WorkSpaceView.mColor = Color.WHITE;
     	WorkSpaceView.mPaint.setColor(WorkSpaceView.mColor);
     	WorkSpaceView.mPaint.setStrokeWidth(WorkSpaceView.mSize);
+    	buttonflag = 1;
     }
 	
 	public void cleanClick(View view) {
