@@ -12,18 +12,30 @@ import java.io.IOException;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 public class MainframeActivity extends Activity {
 	public static final int MODE_PENCIL = 0;
 	public static final int MODE_ERASER = 1;
+	Button penbutton;
+	final static int pensize_S = 0;
+	final static int pensize_M = 1;
+	final static int pensize_L = 2;
+	final static int pencolor1 = 3;
+	final static int pencolor2 = 4;
+	final static int pencolordef = 5;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_mainframe);
-		
+		penbutton = (Button)findViewById(R.id.pen_button);
+		registerForContextMenu(penbutton);
 	}
 
 /*	@Override
@@ -39,7 +51,59 @@ public class MainframeActivity extends Activity {
     	WorkSpaceView.mColor = Color.BLACK;
     	WorkSpaceView.mPaint.setColor(WorkSpaceView.mColor);
     	WorkSpaceView.mPaint.setStrokeWidth(WorkSpaceView.mSize);
+    	
+    	
     }
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo){
+		super.onCreateContextMenu(menu, v, menuInfo);
+		menu.add(0, pensize_S, 0, "small");
+		menu.add(0, pensize_M, 0, "medium");
+		menu.add(0, pensize_L, 0, "larger");
+		menu.add(0, pencolor1, 0, "red");
+		menu.add(0, pencolor2, 0, "blue");
+		menu.add(0, pencolordef, 0, "default");
+	}
+	
+	@Override
+	public boolean onContextItemSelected(MenuItem item){
+		switch(item.getItemId()){
+		case pensize_S:
+			Toast.makeText(this, "You chose small font size", Toast.LENGTH_LONG).show();
+			WorkSpaceView.mSize = 1;
+			WorkSpaceView.mPaint.setStrokeWidth(WorkSpaceView.mSize);
+			break;
+		case pensize_M:
+			Toast.makeText(this, "You chose medium font size", Toast.LENGTH_LONG).show();
+			WorkSpaceView.mSize = 2;
+			WorkSpaceView.mPaint.setStrokeWidth(WorkSpaceView.mSize);
+			break;
+		case pensize_L:
+			Toast.makeText(this, "You chose large font size", Toast.LENGTH_LONG).show();
+			WorkSpaceView.mSize = 5;
+			WorkSpaceView.mPaint.setStrokeWidth(WorkSpaceView.mSize);
+			break;
+		case pencolor1:
+			Toast.makeText(this, "You chose red font color", Toast.LENGTH_LONG).show();
+			WorkSpaceView.mColor = Color.RED;
+			WorkSpaceView.mPaint.setColor(WorkSpaceView.mColor);
+			break;
+		case pencolor2:
+			Toast.makeText(this, "You chose blue font color", Toast.LENGTH_LONG).show();
+			WorkSpaceView.mColor = Color.BLUE;
+			WorkSpaceView.mPaint.setColor(WorkSpaceView.mColor);
+			break;
+		case pencolordef:
+			Toast.makeText(this, "Reset to default", Toast.LENGTH_LONG).show();
+			WorkSpaceView.mSize = 2;
+	    	WorkSpaceView.mColor = Color.BLACK;
+	    	WorkSpaceView.mPaint.setColor(WorkSpaceView.mColor);
+	    	WorkSpaceView.mPaint.setStrokeWidth(WorkSpaceView.mSize);
+	    	break;
+		}
+		return super.onContextItemSelected(item);
+	}
+	
 	
 	public void eraserClick(View view) {
     	WorkSpaceView.mMode = MainframeActivity.MODE_ERASER;

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:id="@+id/pensize" android:title="Size">
+        <menu>
+            <item android:id="@+id/pensmall" android:title="small"/>
+            <item android:id="@+id/penmedium" android:title="medium"/>
+            <item android:id="@+id/penlarge" android:title="large"/>
+        </menu>
+    </item>
+    <item android:id="@+id/pencolor" android:title="Color">
+        <menu>
+            <item android:id="@+id/penred" android:title="red"/>
+            <item android:id="@+id/penblue" android:title="blue"/>
+        </menu>
+    </item>
+    
+
+</menu>
