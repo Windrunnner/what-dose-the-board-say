@@ -78,6 +78,17 @@ public class WorkSpaceView extends View
     		message.obj = cleanMsg;
     		messageHandler.sendMessage(message);
     	}
+    	
+    	if (obj instanceof ShutMsg)
+    	{
+    		// TODO Implement shutting down process
+    		
+    	}
+    	
+    	if (obj instanceof ExitMsg)
+    	{
+    		// TODO Implement Exit message, also exit messaging for Server
+    	}
     }
   
     @Override  
