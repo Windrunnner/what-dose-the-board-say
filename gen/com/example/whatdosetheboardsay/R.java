@@ -89,6 +89,13 @@ public final class R {
         public static final int passedit=0x7f08000e;
         public static final int passtext=0x7f08000c;
         public static final int pen_button=0x7f080020;
+        public static final int penblue=0x7f080031;
+        public static final int pencolor=0x7f08002f;
+        public static final int penlarge=0x7f08002e;
+        public static final int penmedium=0x7f08002d;
+        public static final int penred=0x7f080030;
+        public static final int pensize=0x7f08002b;
+        public static final int pensmall=0x7f08002c;
         public static final int redo_button=0x7f080028;
         public static final int save_button=0x7f080024;
         public static final int setPasswordTxt=0x7f080002;
@@ -121,8 +128,9 @@ public final class R {
         public static final int join_interface_activity=0x7f070003;
         public static final int main=0x7f070004;
         public static final int mainframe=0x7f070005;
-        public static final int start_up_interface=0x7f070006;
-        public static final int work_space=0x7f070007;
+        public static final int pencil_menu=0x7f070006;
+        public static final int start_up_interface=0x7f070007;
+        public static final int work_space=0x7f070008;
     }
     public static final class string {
         public static final int action_forgot_password=0x7f05000f;
