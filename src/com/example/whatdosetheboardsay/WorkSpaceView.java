@@ -21,6 +21,7 @@ public class WorkSpaceView extends View
 	private static RandomLineMsg ranLine;
     private static RandomLineMsg receivedRanLine = null;
     public static WorkSpaceView mWorkSpaceView = null;
+    public static MainframeActivity mMainframeActivity = null;
       
     private Bitmap mBitmap;  //保存每次绘画的结果  
     private Handler messageHandler;
@@ -82,12 +83,21 @@ public class WorkSpaceView extends View
     	if (obj instanceof ShutMsg)
     	{
     		// TODO Implement shutting down process
+    		mMainframeActivity.showToast("Server has already shut down! Nothing will be sychronized any more.");
     		
     	}
     	
     	if (obj instanceof ExitMsg)
     	{
     		// TODO Implement Exit message, also exit messaging for Server
+    		mMainframeActivity.onSbExit(((ExitMsg) obj).getClient());
+    		if (GDB_sc.getIsServer()){
+        		try {
+        			GDB_sc.sendByteMessage(GDB_sc.getBytes(obj));
+        		} catch (IOException e) {
+        			e.printStackTrace();
+        		}
+    		}
     	}
     }
   

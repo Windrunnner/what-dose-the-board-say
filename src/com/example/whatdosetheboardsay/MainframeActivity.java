@@ -51,6 +51,7 @@ public class MainframeActivity extends Activity {
 		eraserbutton = (Button)findViewById(R.id.eraser_button);
 		registerForContextMenu(penbutton);
 		registerForContextMenu(eraserbutton);
+		WorkSpaceView.mMainframeActivity = this;
 	}
 
 /*	@Override
@@ -194,13 +195,15 @@ public class MainframeActivity extends Activity {
 			e.printStackTrace();
 		}
     }
-	
+	public void showToast(String string){
+		Toast.makeText(this, string, Toast.LENGTH_SHORT).show();
+	}
     /**
      * Called if received an ExitMsg, it will show a "Toast" message to notify the users.
      * @param client Quitting Client number
      */
     public void onSbExit(int client){
-    	Toast.makeText(this, Server.addList.get(client) + "just quited.", Toast.LENGTH_SHORT).show();
+    	showToast("Client " + Integer.toString(client) + " just quited.");
     }
     
     @Override
