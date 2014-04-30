@@ -157,18 +157,24 @@ public class MainframeActivity extends Activity {
 			Toast.makeText(this, "You chose small font size", Toast.LENGTH_LONG).show();
 			WorkSpaceView.mSize = 1;
 			currentSize = 1;
+			WorkSpaceView.mColor = currentColor;
+	    	WorkSpaceView.mPaint.setColor(WorkSpaceView.mColor);
 			WorkSpaceView.mPaint.setStrokeWidth(WorkSpaceView.mSize);
 			break;
 		case pensize_M:
 			Toast.makeText(this, "You chose medium font size", Toast.LENGTH_LONG).show();
 			WorkSpaceView.mSize = 2;
 			currentSize = 2;
+			WorkSpaceView.mColor = currentColor;
+	    	WorkSpaceView.mPaint.setColor(WorkSpaceView.mColor);
 			WorkSpaceView.mPaint.setStrokeWidth(WorkSpaceView.mSize);
 			break;
 		case pensize_L:
 			Toast.makeText(this, "You chose large font size", Toast.LENGTH_LONG).show();
 			WorkSpaceView.mSize = 5;
 			currentSize = 5;
+			WorkSpaceView.mColor = currentColor;
+	    	WorkSpaceView.mPaint.setColor(WorkSpaceView.mColor);
 			WorkSpaceView.mPaint.setStrokeWidth(WorkSpaceView.mSize);
 			break;
 		case pencolor1:
@@ -176,30 +182,40 @@ public class MainframeActivity extends Activity {
 			WorkSpaceView.mColor = Color.RED;
 			currentColor = Color.RED;
 			WorkSpaceView.mPaint.setColor(WorkSpaceView.mColor);
+			WorkSpaceView.mSize = currentSize;
+			WorkSpaceView.mPaint.setStrokeWidth(WorkSpaceView.mSize);
 			break;
 		case pencolor2:
 			Toast.makeText(this, "You chose blue font color", Toast.LENGTH_LONG).show();
 			WorkSpaceView.mColor = Color.BLUE;
 			currentColor = Color.BLUE;
 			WorkSpaceView.mPaint.setColor(WorkSpaceView.mColor);
+			WorkSpaceView.mSize = currentSize;
+			WorkSpaceView.mPaint.setStrokeWidth(WorkSpaceView.mSize);
 			break;
 		case pencolor3:
 			Toast.makeText(this, "You chose yellow font color", Toast.LENGTH_LONG).show();
 			WorkSpaceView.mColor = Color.YELLOW;
 			currentColor = Color.YELLOW;
 			WorkSpaceView.mPaint.setColor(WorkSpaceView.mColor);
+			WorkSpaceView.mSize = currentSize;
+			WorkSpaceView.mPaint.setStrokeWidth(WorkSpaceView.mSize);
 			break;
 		case pencolor4:
 			Toast.makeText(this, "You chose green font color", Toast.LENGTH_LONG).show();
 			WorkSpaceView.mColor = Color.GREEN;
 			currentColor = Color.GREEN;
 			WorkSpaceView.mPaint.setColor(WorkSpaceView.mColor);
+			WorkSpaceView.mSize = currentSize;
+			WorkSpaceView.mPaint.setStrokeWidth(WorkSpaceView.mSize);
 			break;
 		case pencolor5:
 			Toast.makeText(this, "You chose MAGENTA font color", Toast.LENGTH_LONG).show();
 			WorkSpaceView.mColor = Color.MAGENTA;
 			currentColor = Color.MAGENTA;
 			WorkSpaceView.mPaint.setColor(WorkSpaceView.mColor);
+			WorkSpaceView.mSize = currentSize;
+			WorkSpaceView.mPaint.setStrokeWidth(WorkSpaceView.mSize);
 			break;
 		case pencolordef:
 			Toast.makeText(this, "Reset to default", Toast.LENGTH_LONG).show();
@@ -214,18 +230,24 @@ public class MainframeActivity extends Activity {
 			Toast.makeText(this, "You chose small eraser size", Toast.LENGTH_LONG).show();
 			WorkSpaceView.mSize = 15;
 			currentEraserSize = 15;
+			WorkSpaceView.mColor = Color.WHITE;
+	    	WorkSpaceView.mPaint.setColor(WorkSpaceView.mColor);
 			WorkSpaceView.mPaint.setStrokeWidth(WorkSpaceView.mSize);
 			break;
 		case erasersizeM:
 			Toast.makeText(this, "You chose medium eraser size", Toast.LENGTH_LONG).show();
 			WorkSpaceView.mSize = 30;
 			currentEraserSize = 30;
+			WorkSpaceView.mColor = Color.WHITE;
+	    	WorkSpaceView.mPaint.setColor(WorkSpaceView.mColor);
 			WorkSpaceView.mPaint.setStrokeWidth(WorkSpaceView.mSize);
 			break;
 		case erasersizeL:
 			Toast.makeText(this, "You chose Large eraser size", Toast.LENGTH_LONG).show();
 			WorkSpaceView.mSize = 50;
 			currentEraserSize = 50;
+			WorkSpaceView.mColor = Color.WHITE;
+	    	WorkSpaceView.mPaint.setColor(WorkSpaceView.mColor);
 			WorkSpaceView.mPaint.setStrokeWidth(WorkSpaceView.mSize);
 			break;
 		}
