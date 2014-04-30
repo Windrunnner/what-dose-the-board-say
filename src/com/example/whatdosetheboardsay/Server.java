@@ -65,7 +65,7 @@ public class Server implements Runnable {
 				if (exit) {
 					socket.close();
 					ssm.exit = true;
-					ssm.sendMessage(null);
+					//ssm.sendMessage(null);
 					break;
 				}
 				DatagramPacket packet = new DatagramPacket(bufsize, 4);

@@ -313,6 +313,7 @@ public class MainframeActivity extends Activity {
 	}
 	
 	public void showToast(final String string){
+		Log.d("Toast", "Toasting: " + string);
 		this.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
@@ -340,8 +341,8 @@ public class MainframeActivity extends Activity {
         		} catch (IOException e) {
         			e.printStackTrace();
         		}
-        		Server.exit = true;
-        		GDB_sc.sendByteMessage(null);
+        		//Server.exit = true;
+        		//GDB_sc.sendByteMessage(null);
         		return super.onKeyDown(keyCode, event);//The Back key also need to be handled by system, so return false. 
         	} else {
         		IMessage exitMsg = new ExitMsg(JoinInterface_activity.uid);
@@ -351,7 +352,7 @@ public class MainframeActivity extends Activity {
         		} catch (IOException e) {
         			e.printStackTrace();
         		}
-        		Client.exit = true;
+        		//Client.exit = true;
         		return super.onKeyDown(keyCode, event);//The Back key also need to be handled by system, so return false.
         	}
         }
