@@ -17,6 +17,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:background="@drawable/textbuttons"
+        android:onClick="userClick"
         android:text="User Manage" />
 
     <Button

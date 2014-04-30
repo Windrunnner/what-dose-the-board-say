@@ -14,6 +14,9 @@ import java.io.IOException;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
+import android.app.Dialog;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
@@ -48,6 +51,7 @@ public class MainframeActivity extends Activity {
 	final static int erasersizeM = 12;
 	final static int erasersizeL = 13;
 
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -66,6 +70,61 @@ public class MainframeActivity extends Activity {
 		return true;
 	}*/
 	
+	@SuppressWarnings("deprecation")
+	public void userClick(View view){
+		showDialog(1);
+	}
+	
+	@Override
+	protected Dialog onCreateDialog(int id){
+		String[] listing;
+		Dialog dialog = null;
+		final boolean[] flags;
+		int count = GDB_sc.GetClientCount();
+		//test for count
+		//count = 8;
+		if(count >= 0){
+			listing = new String[count];
+			flags = new boolean[count];
+			for(int i = 0; i < count; i++){
+				listing[i] = "User" + (i+1);
+				flags[i] = false;
+			}
+		
+		switch(id){
+		case 1:
+			Builder builder = new android.app.AlertDialog.Builder(this);
+			builder.setTitle("User Management (Check to ignore user)");
+			builder.setMultiChoiceItems(listing, flags, new DialogInterface.OnMultiChoiceClickListener(){
+				public void onClick(DialogInterface dialog, int which, boolean isChecked){
+					int[] permit = GDB_sc.GetClientPremit();
+					flags[which] = isChecked;
+					for(int j = 0; j < flags.length; j++){
+						if(flags[j] == false){
+
+							GDB_sc.SetPremit(j, 0);
+
+						}else if(flags[j] == true){
+
+							GDB_sc.SetPremit(j, 1);
+
+						}
+					}
+				}
+			});
+
+			builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener(){
+                public void onClick(DialogInterface dialog, int which) {
+                    
+                }
+            });
+			dialog=builder.create();
+			break;
+			}
+		}
+		return dialog;
+	}
+	
 	public void pencilClick(View view) {
     	WorkSpaceView.mMode = MainframeActivity.MODE_PENCIL;
     	WorkSpaceView.mSize = currentSize;
@@ -73,13 +132,12 @@ public class MainframeActivity extends Activity {
     	WorkSpaceView.mPaint.setColor(WorkSpaceView.mColor);
     	WorkSpaceView.mPaint.setStrokeWidth(WorkSpaceView.mSize);
     	buttonflag = 0;
-    	
-    	
     }
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo){
 		super.onCreateContextMenu(menu, v, menuInfo);
-		if(buttonflag == 0){
+		
+		if(v.getId() == R.id.pen_button){
 		menu.add(0, pencolordef, 0, "default");
 		menu.add(0, pensize_S, 0, "small");
 		menu.add(0, pensize_M, 0, "medium");
@@ -90,7 +148,7 @@ public class MainframeActivity extends Activity {
 		menu.add(0, pencolor4, 0, "green");
 		menu.add(0, pencolor5, 0, "magenta");
 		}
-		if(buttonflag == 1){
+		if(v.getId() == R.id.eraser_button){
 		menu.add(0, erasersizeS, 0, "small");
 		menu.add(0, erasersizeM, 0, "medium");
 		menu.add(0, erasersizeL, 0, "larger");
@@ -104,18 +162,24 @@ public class MainframeActivity extends Activity {
 			Toast.makeText(this, "You chose small font size", Toast.LENGTH_LONG).show();
 			WorkSpaceView.mSize = 1;
 			currentSize = 1;
+			WorkSpaceView.mColor = currentColor;
+	    	WorkSpaceView.mPaint.setColor(WorkSpaceView.mColor);
 			WorkSpaceView.mPaint.setStrokeWidth(WorkSpaceView.mSize);
 			break;
 		case pensize_M:
 			Toast.makeText(this, "You chose medium font size", Toast.LENGTH_LONG).show();
 			WorkSpaceView.mSize = 2;
 			currentSize = 2;
+			WorkSpaceView.mColor = currentColor;
+	    	WorkSpaceView.mPaint.setColor(WorkSpaceView.mColor);
 			WorkSpaceView.mPaint.setStrokeWidth(WorkSpaceView.mSize);
 			break;
 		case pensize_L:
 			Toast.makeText(this, "You chose large font size", Toast.LENGTH_LONG).show();
 			WorkSpaceView.mSize = 5;
 			currentSize = 5;
+			WorkSpaceView.mColor = currentColor;
+	    	WorkSpaceView.mPaint.setColor(WorkSpaceView.mColor);
 			WorkSpaceView.mPaint.setStrokeWidth(WorkSpaceView.mSize);
 			break;
 		case pencolor1:
@@ -123,30 +187,40 @@ public class MainframeActivity extends Activity {
 			WorkSpaceView.mColor = Color.RED;
 			currentColor = Color.RED;
 			WorkSpaceView.mPaint.setColor(WorkSpaceView.mColor);
+			WorkSpaceView.mSize = currentSize;
+			WorkSpaceView.mPaint.setStrokeWidth(WorkSpaceView.mSize);
 			break;
 		case pencolor2:
 			Toast.makeText(this, "You chose blue font color", Toast.LENGTH_LONG).show();
 			WorkSpaceView.mColor = Color.BLUE;
 			currentColor = Color.BLUE;
 			WorkSpaceView.mPaint.setColor(WorkSpaceView.mColor);
+			WorkSpaceView.mSize = currentSize;
+			WorkSpaceView.mPaint.setStrokeWidth(WorkSpaceView.mSize);
 			break;
 		case pencolor3:
 			Toast.makeText(this, "You chose yellow font color", Toast.LENGTH_LONG).show();
 			WorkSpaceView.mColor = Color.YELLOW;
 			currentColor = Color.YELLOW;
 			WorkSpaceView.mPaint.setColor(WorkSpaceView.mColor);
+			WorkSpaceView.mSize = currentSize;
+			WorkSpaceView.mPaint.setStrokeWidth(WorkSpaceView.mSize);
 			break;
 		case pencolor4:
 			Toast.makeText(this, "You chose green font color", Toast.LENGTH_LONG).show();
 			WorkSpaceView.mColor = Color.GREEN;
 			currentColor = Color.GREEN;
 			WorkSpaceView.mPaint.setColor(WorkSpaceView.mColor);
+			WorkSpaceView.mSize = currentSize;
+			WorkSpaceView.mPaint.setStrokeWidth(WorkSpaceView.mSize);
 			break;
 		case pencolor5:
 			Toast.makeText(this, "You chose MAGENTA font color", Toast.LENGTH_LONG).show();
 			WorkSpaceView.mColor = Color.MAGENTA;
 			currentColor = Color.MAGENTA;
 			WorkSpaceView.mPaint.setColor(WorkSpaceView.mColor);
+			WorkSpaceView.mSize = currentSize;
+			WorkSpaceView.mPaint.setStrokeWidth(WorkSpaceView.mSize);
 			break;
 		case pencolordef:
 			Toast.makeText(this, "Reset to default", Toast.LENGTH_LONG).show();
@@ -161,18 +235,24 @@ public class MainframeActivity extends Activity {
 			Toast.makeText(this, "You chose small eraser size", Toast.LENGTH_LONG).show();
 			WorkSpaceView.mSize = 15;
 			currentEraserSize = 15;
+			WorkSpaceView.mColor = Color.WHITE;
+	    	WorkSpaceView.mPaint.setColor(WorkSpaceView.mColor);
 			WorkSpaceView.mPaint.setStrokeWidth(WorkSpaceView.mSize);
 			break;
 		case erasersizeM:
 			Toast.makeText(this, "You chose medium eraser size", Toast.LENGTH_LONG).show();
 			WorkSpaceView.mSize = 30;
 			currentEraserSize = 30;
+			WorkSpaceView.mColor = Color.WHITE;
+	    	WorkSpaceView.mPaint.setColor(WorkSpaceView.mColor);
 			WorkSpaceView.mPaint.setStrokeWidth(WorkSpaceView.mSize);
 			break;
 		case erasersizeL:
 			Toast.makeText(this, "You chose Large eraser size", Toast.LENGTH_LONG).show();
 			WorkSpaceView.mSize = 50;
 			currentEraserSize = 50;
+			WorkSpaceView.mColor = Color.WHITE;
+	    	WorkSpaceView.mPaint.setColor(WorkSpaceView.mColor);
 			WorkSpaceView.mPaint.setStrokeWidth(WorkSpaceView.mSize);
 			break;
 		}
@@ -200,7 +280,7 @@ public class MainframeActivity extends Activity {
 			e.printStackTrace();
 		}
     }
-	
+
 	public void saveClick(View view) {
 		File f = new File(Environment.getExternalStorageDirectory() + "/Pictures/whiteboard.png");
 		Log.i("Save", "Save");
@@ -232,8 +312,14 @@ public class MainframeActivity extends Activity {
 		}	
 	}
 	
-	public void showToast(String string){
-		Toast.makeText(this, string, Toast.LENGTH_SHORT).show();
+	public void showToast(final String string){
+		this.runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				Toast.makeText(MainframeActivity.this, string, Toast.LENGTH_SHORT).show();
+			}
+		});
+		
 	}
     /**
      * Called if received an ExitMsg, it will show a "Toast" message to notify the users.
@@ -248,13 +334,15 @@ public class MainframeActivity extends Activity {
         if(keyCode == KeyEvent.KEYCODE_BACK) {
         	if (GDB_sc.getIsServer()){
         		IMessage shutMsg = new ShutMsg();
-        		//WorkSpaceView.mWorkSpaceView.messageReceived(shutMsg);
+        		//WorkSpaceView.mWorkSpaceView.messageReceived(shutMsg);x
         		try {
         			GDB_sc.sendByteMessage(GDB_sc.getBytes(shutMsg));
         		} catch (IOException e) {
         			e.printStackTrace();
         		}
-        		return false;//The Back key also need to be handled by system, so return false. 
+        		Server.exit = true;
+        		GDB_sc.sendByteMessage(null);
+        		return super.onKeyDown(keyCode, event);//The Back key also need to be handled by system, so return false. 
         	} else {
         		IMessage exitMsg = new ExitMsg(JoinInterface_activity.uid);
         		//WorkSpaceView.mWorkSpaceView.messageReceived(exitMsg);
@@ -263,7 +351,8 @@ public class MainframeActivity extends Activity {
         		} catch (IOException e) {
         			e.printStackTrace();
         		}
-        		return false;//The Back key also need to be handled by system, so return false.
+        		Client.exit = true;
+        		return super.onKeyDown(keyCode, event);//The Back key also need to be handled by system, so return false.
         	}
         }
         return super.onKeyDown(keyCode, event);//Other keys will just be handled by the super class.
