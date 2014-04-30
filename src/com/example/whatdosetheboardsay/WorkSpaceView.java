@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -22,6 +23,7 @@ public class WorkSpaceView extends View
     private static RandomLineMsg receivedRanLine = null;
     public static WorkSpaceView mWorkSpaceView = null;
     public static MainframeActivity mMainframeActivity = null;
+    public static Bitmap mmBitmap = null;
       
     private Bitmap mBitmap;  //保存每次绘画的结果  
     private Handler messageHandler;
@@ -39,7 +41,7 @@ public class WorkSpaceView extends View
         {
         	mWorkSpaceView = this;
         }
-        
+        	
         Looper looper = Looper.myLooper();
         messageHandler = new MessageHandler(looper);
         
@@ -101,6 +103,26 @@ public class WorkSpaceView extends View
     	}
     }
   
+    private void createWhiteBitmap(Bitmap bitmap, int width, int height)
+    {
+
+    	int []pix = new int[width * height];
+    	
+    	for (int y = 0; y < height; y++)
+    	{
+    		for (int x = 0; x < width; x++)
+    		{
+    			int index = y * width + x;
+    			int r = ((pix[index] >> 16) & 0xff)|0xff;
+    			int g = ((pix[index] >> 8) & 0xff)|0xff;
+    			int b = (pix[index] & 0xff)|0xff;
+    			pix[index] = 0xff000000 | (r << 16) | (g << 8) | b;
+    		}
+    	}
+    	
+    	mBitmap.setPixels(pix, 0, width, 0, 0, width, height);
+    }
+    
     @Override  
     protected void onDraw(Canvas canvas) {  
         super.onDraw(canvas);
@@ -108,9 +130,11 @@ public class WorkSpaceView extends View
         int width = getWidth();  
         int height = getHeight();  
           
-        if (mBitmap == null) {  
-            mBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);  
-        }  
+        if (mBitmap == null)
+        {
+        	mBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        	createWhiteBitmap(mBitmap, width, height);
+        }
           
         //先将结果画到Bitmap上  
         Canvas tmpCanvas = new Canvas(mBitmap);
@@ -123,6 +147,7 @@ public class WorkSpaceView extends View
         else if (isClean)
         {
         	mBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        	createWhiteBitmap(mBitmap, width, height);
         	isClean = false;
         }
         else
@@ -130,7 +155,8 @@ public class WorkSpaceView extends View
         	tmpCanvas.drawLine(mLastX, mLastY, mCurrX, mCurrY, mPaint);
         }
         //再把Bitmap画到canvas上  
-        canvas.drawBitmap(mBitmap, 0, 0, mPaint);  
+        canvas.drawBitmap(mBitmap, 0, 0, mPaint);
+        mmBitmap = mBitmap;
     }  
       
     @Override  

@@ -75,6 +75,7 @@
         android:layout_alignLeft="@+id/image_button"
         android:layout_alignRight="@+id/image_button"
         android:layout_below="@+id/image_button"
+        android:onClick="saveClick"
         android:background="@drawable/buttonsave"
         android:text="Save" />
 

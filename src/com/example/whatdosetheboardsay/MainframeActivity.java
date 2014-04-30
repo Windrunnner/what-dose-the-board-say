@@ -7,15 +7,20 @@ package com.example.whatdosetheboardsay;
  * @author Zhuo Chen, Yik Fei Wong
  *
  */
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.view.KeyEvent;
+import android.os.Environment;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -195,6 +200,38 @@ public class MainframeActivity extends Activity {
 			e.printStackTrace();
 		}
     }
+	
+	public void saveClick(View view) {
+		File f = new File(Environment.getExternalStorageDirectory() + "/Pictures/whiteboard.png");
+		Log.i("Save", "Save");
+		
+		if (f.exists())
+		{
+			f.delete();
+		}
+		
+		try
+		{
+			FileOutputStream out = new FileOutputStream(f);
+			
+			if (WorkSpaceView.mmBitmap != null)
+			{
+				WorkSpaceView.mmBitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
+				out.flush();
+				out.close();
+				Log.i("Save", "Picture Saved");
+			}
+		}
+		catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}	
+	}
+	
 	public void showToast(String string){
 		Toast.makeText(this, string, Toast.LENGTH_SHORT).show();
 	}
