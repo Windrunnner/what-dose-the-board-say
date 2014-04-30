@@ -10,6 +10,9 @@ package com.example.whatdosetheboardsay;
 import java.io.IOException;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -43,6 +46,7 @@ public class MainframeActivity extends Activity {
 	final static int erasersizeM = 12;
 	final static int erasersizeL = 13;
 
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -61,6 +65,61 @@ public class MainframeActivity extends Activity {
 		return true;
 	}*/
 	
+	@SuppressWarnings("deprecation")
+	public void userClick(View view){
+		showDialog(1);
+	}
+	
+	@Override
+	protected Dialog onCreateDialog(int id){
+		String[] listing;
+		Dialog dialog = null;
+		final boolean[] flags;
+		int count = GDB_sc.GetClientCount();
+		//test for count
+		//count = 8;
+		if(count >= 0){
+			listing = new String[count];
+			flags = new boolean[count];
+			for(int i = 0; i < count; i++){
+				listing[i] = "User" + (i+1);
+				flags[i] = true;
+			}
+		
+		switch(id){
+		case 1:
+			Builder builder = new android.app.AlertDialog.Builder(this);
+			builder.setTitle("User Management (Click to ignore user)");
+			builder.setMultiChoiceItems(listing, flags, new DialogInterface.OnMultiChoiceClickListener(){
+				public void onClick(DialogInterface dialog, int which, boolean isChecked){
+					int[] permit = GDB_sc.GetClientPremit();
+					flags[which] = isChecked;
+					for(int j = 0; j < flags.length; j++){
+						if(flags[j] == false){
+							if(permit[j] == 1){
+								GDB_sc.SetPremit(j, 0);
+							}
+						}if(flags[j] == true){
+							if(permit[j] == 0){
+								GDB_sc.SetPremit(j, 1);
+							}
+						}
+					}
+				}
+			});
+
+			builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener(){
+                public void onClick(DialogInterface dialog, int which) {
+                    
+                }
+            });
+			dialog=builder.create();
+			break;
+			}
+		}
+		return dialog;
+	}
+	
 	public void pencilClick(View view) {
     	WorkSpaceView.mMode = MainframeActivity.MODE_PENCIL;
     	WorkSpaceView.mSize = currentSize;
@@ -68,8 +127,6 @@ public class MainframeActivity extends Activity {
     	WorkSpaceView.mPaint.setColor(WorkSpaceView.mColor);
     	WorkSpaceView.mPaint.setStrokeWidth(WorkSpaceView.mSize);
     	buttonflag = 0;
-    	
-    	
     }
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo){
