@@ -83,26 +83,26 @@ public class MainframeActivity extends Activity {
 			flags = new boolean[count];
 			for(int i = 0; i < count; i++){
 				listing[i] = "User" + (i+1);
-				flags[i] = true;
+				flags[i] = false;
 			}
 		
 		switch(id){
 		case 1:
 			Builder builder = new android.app.AlertDialog.Builder(this);
-			builder.setTitle("User Management (Click to ignore user)");
+			builder.setTitle("User Management (Check to ignore user)");
 			builder.setMultiChoiceItems(listing, flags, new DialogInterface.OnMultiChoiceClickListener(){
 				public void onClick(DialogInterface dialog, int which, boolean isChecked){
 					int[] permit = GDB_sc.GetClientPremit();
 					flags[which] = isChecked;
 					for(int j = 0; j < flags.length; j++){
 						if(flags[j] == false){
-							if(permit[j] == 1){
-								GDB_sc.SetPremit(j, 0);
-							}
-						}if(flags[j] == true){
-							if(permit[j] == 0){
-								GDB_sc.SetPremit(j, 1);
-							}
+
+							GDB_sc.SetPremit(j, 0);
+
+						}else if(flags[j] == true){
+
+							GDB_sc.SetPremit(j, 1);
+
 						}
 					}
 				}
@@ -131,7 +131,8 @@ public class MainframeActivity extends Activity {
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo){
 		super.onCreateContextMenu(menu, v, menuInfo);
-		if(buttonflag == 0){
+		
+		if(v.getId() == R.id.pen_button){
 		menu.add(0, pencolordef, 0, "default");
 		menu.add(0, pensize_S, 0, "small");
 		menu.add(0, pensize_M, 0, "medium");
@@ -142,7 +143,7 @@ public class MainframeActivity extends Activity {
 		menu.add(0, pencolor4, 0, "green");
 		menu.add(0, pencolor5, 0, "magenta");
 		}
-		if(buttonflag == 1){
+		if(v.getId() == R.id.eraser_button){
 		menu.add(0, erasersizeS, 0, "small");
 		menu.add(0, erasersizeM, 0, "medium");
 		menu.add(0, erasersizeL, 0, "larger");
