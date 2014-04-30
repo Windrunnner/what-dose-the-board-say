@@ -195,8 +195,14 @@ public class MainframeActivity extends Activity {
 			e.printStackTrace();
 		}
     }
-	public void showToast(String string){
-		Toast.makeText(this, string, Toast.LENGTH_SHORT).show();
+	public void showToast(final String string){
+		this.runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				Toast.makeText(MainframeActivity.this, string, Toast.LENGTH_SHORT).show();
+			}
+		});
+		
 	}
     /**
      * Called if received an ExitMsg, it will show a "Toast" message to notify the users.
@@ -211,13 +217,15 @@ public class MainframeActivity extends Activity {
         if(keyCode == KeyEvent.KEYCODE_BACK) {
         	if (GDB_sc.getIsServer()){
         		IMessage shutMsg = new ShutMsg();
-        		//WorkSpaceView.mWorkSpaceView.messageReceived(shutMsg);
+        		//WorkSpaceView.mWorkSpaceView.messageReceived(shutMsg);x
         		try {
         			GDB_sc.sendByteMessage(GDB_sc.getBytes(shutMsg));
         		} catch (IOException e) {
         			e.printStackTrace();
         		}
-        		return false;//The Back key also need to be handled by system, so return false. 
+        		Server.exit = true;
+        		GDB_sc.sendByteMessage(null);
+        		return super.onKeyDown(keyCode, event);//The Back key also need to be handled by system, so return false. 
         	} else {
         		IMessage exitMsg = new ExitMsg(JoinInterface_activity.uid);
         		//WorkSpaceView.mWorkSpaceView.messageReceived(exitMsg);
@@ -226,7 +234,8 @@ public class MainframeActivity extends Activity {
         		} catch (IOException e) {
         			e.printStackTrace();
         		}
-        		return false;//The Back key also need to be handled by system, so return false.
+        		Client.exit = true;
+        		return super.onKeyDown(keyCode, event);//The Back key also need to be handled by system, so return false.
         	}
         }
         return super.onKeyDown(keyCode, event);//Other keys will just be handled by the super class.

@@ -19,6 +19,7 @@ public class Server implements Runnable {
 	public static String password = null;
 	public static DatagramSocket socket;
 	public static ServerSendMsg ssm;
+	public static boolean exit = false;
 	public void SetPremit(int clientID, int YesNo){
 		if(YesNo==1){
 			badID.add(clientID);
@@ -61,6 +62,12 @@ public class Server implements Runnable {
 			ssm = new ServerSendMsg() ;
 			new Thread(ssm).start();
 			while (true) {
+				if (exit) {
+					socket.close();
+					ssm.exit = true;
+					ssm.sendMessage(null);
+					break;
+				}
 				DatagramPacket packet = new DatagramPacket(bufsize, 4);
 				Log.d("UDP", "S: Receiving datasize...");
 				socket.receive(packet);
@@ -172,6 +179,7 @@ public class Server implements Runnable {
 
 class ServerSendMsg implements Runnable {
 	public byte[] toall;
+	public static boolean exit = false;
 
 	public void sendMessage(byte[] toalll) {
 		toall = toalll;
@@ -188,6 +196,9 @@ class ServerSendMsg implements Runnable {
 				Log.d("S: send", "init start");
 				synchronized (this) {
 					this.wait();
+				}
+				if (exit) {
+					break;
 				}
 				Log.d("S: send", "start");
 				for (int i = 0; i < Server.clientCount; i++) {

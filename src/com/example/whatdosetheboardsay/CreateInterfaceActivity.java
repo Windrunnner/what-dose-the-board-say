@@ -45,14 +45,14 @@ public class CreateInterfaceActivity extends Activity {
 	}
 	
     public void createServer(View view) {
-    	if (serverThread == null){
+    	//if (serverThread == null){
     		server = new Server();
     		Server.password = ((EditText) findViewById(R.id.editSetPassword_create)).getText().toString();
     		serverThread = new Thread(server);
     		serverThread.start();
         	Intent intent = new Intent(this, MainframeActivity.class);
       	  	startActivity(intent);
-    	}   		
+    	//}   		
     	
     }
 

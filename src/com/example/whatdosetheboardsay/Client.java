@@ -11,6 +11,7 @@ import android.util.Log;
 			private String ClientIP = "127.0.0.1";
 			private String ServerIP = "127.0.0.1";
 			private byte[] buf;
+			public static boolean exit = false;
 			public static String str = "";
 			public static Clientrvmsg Clientrv;
 			public void sendMessage(byte[] toall){
@@ -38,6 +39,12 @@ import android.util.Log;
 	                    		synchronized (this) {
 	                    			this.wait();
 	                    		}
+	                			if (exit){
+	                				//TODO client stop
+	                				GDB_sc.socket.close();
+	                				Clientrvmsg.exit = true;
+	                				break;
+	                			}
 	                    	//	str = JoinInterface_activity.uid + "|" + str;
 	                    		Log.d("UDP", "C: CheckPoint");
 	                    	//	byte[] buf = str.getBytes();
@@ -57,6 +64,7 @@ import android.util.Log;
 	class Clientrvmsg implements Runnable{
 		private String ClientIP = "127.0.0.1";
 		private String ServerIP = "127.0.0.1";
+		public static boolean exit = false;
 		public static String str = "";
 	    public void run() {
 	    	ClientIP = GDB_sc.GetLocalIpAddress();
@@ -64,6 +72,9 @@ import android.util.Log;
             byte[] bufsize = new byte[4];
                 try {
                     while(true){
+                    	if (exit) {
+                    		break;
+                    	}
                     	DatagramPacket packet = new DatagramPacket(bufsize, 4);
                     	Log.d("UDP", "C: Receiving datasize...");
                     	GDB_sc.socket.receive(packet);
