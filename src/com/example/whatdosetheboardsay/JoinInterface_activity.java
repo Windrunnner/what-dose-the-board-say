@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class JoinInterface_activity extends Activity {
 	public static int uid = -1;
@@ -58,6 +59,11 @@ public class JoinInterface_activity extends Activity {
         	Intent intent = new Intent(this, MainframeActivity.class);
       	  	startActivity(intent);
     	}
+    	else if (uid == -1){
+    		Toast.makeText(this, "Join Failed. Check your password!", Toast.LENGTH_LONG).show();
+    	}
+    	else 
+    		Toast.makeText(this, "Joining process timed out. Check the IP!", Toast.LENGTH_LONG);
 	}
 
 }

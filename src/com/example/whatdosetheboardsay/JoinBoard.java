@@ -95,7 +95,7 @@ public class JoinBoard implements Runnable {
         		JoinInterface_activity.joinThread.notify();
         	}
         } catch (Exception e) {
-        	JoinInterface_activity.uid = -1;
+        	JoinInterface_activity.uid = -2;
             Log.e("UDP", "C: Error", e);
         	synchronized (JoinInterface_activity.joinThread) {
         		JoinInterface_activity.joinThread.notify();
