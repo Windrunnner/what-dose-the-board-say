@@ -86,6 +86,7 @@ public class WorkSpaceView extends View
     	{
     		// TODO Implement shutting down process
     		mMainframeActivity.showToast("Server has already shut down! Nothing will be sychronized any more.");
+    		mMainframeActivity.finish();
     		
     	}
     	

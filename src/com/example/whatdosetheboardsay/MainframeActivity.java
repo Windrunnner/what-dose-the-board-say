@@ -65,6 +65,7 @@ public class MainframeActivity extends Activity {
 			this.setTitle("Whiteboard: Server");
 		else
 			this.setTitle("Whiteboard: Client " + JoinInterface_activity.uid);
+		Toast.makeText(this, "Long press \"Pencil\"/\"Eraser\" for more options.", Toast.LENGTH_LONG).show();
 	}
 
 /*	@Override
@@ -124,7 +125,23 @@ public class MainframeActivity extends Activity {
             });
 			dialog=builder.create();
 			break;
-			}
+		case 2:
+			Builder sbuilder = new android.app.AlertDialog.Builder(this);
+			sbuilder.setTitle("Do you want to save the content as an image?");
+			sbuilder.setNegativeButton("No", new DialogInterface.OnClickListener(){
+                public void onClick(DialogInterface dialog, int which) {
+                    
+                }
+            });
+
+			sbuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener(){
+                public void onClick(DialogInterface dialog, int which) {
+                    MainframeActivity.this.cSave();
+                }
+            });
+			dialog=sbuilder.create();
+			break;
+		}
 		}
 		return dialog;
 	}
@@ -164,24 +181,24 @@ public class MainframeActivity extends Activity {
 		switch(item.getItemId()){
 		case pensize_S:
 			Toast.makeText(this, "You chose small font size", Toast.LENGTH_LONG).show();
-			WorkSpaceView.mSize = 1;
-			currentSize = 1;
-			WorkSpaceView.mColor = currentColor;
-	    	WorkSpaceView.mPaint.setColor(WorkSpaceView.mColor);
-			WorkSpaceView.mPaint.setStrokeWidth(WorkSpaceView.mSize);
-			break;
-		case pensize_M:
-			Toast.makeText(this, "You chose medium font size", Toast.LENGTH_LONG).show();
 			WorkSpaceView.mSize = 2;
 			currentSize = 2;
 			WorkSpaceView.mColor = currentColor;
 	    	WorkSpaceView.mPaint.setColor(WorkSpaceView.mColor);
 			WorkSpaceView.mPaint.setStrokeWidth(WorkSpaceView.mSize);
 			break;
+		case pensize_M:
+			Toast.makeText(this, "You chose medium font size", Toast.LENGTH_LONG).show();
+			WorkSpaceView.mSize = 6;
+			currentSize = 6;
+			WorkSpaceView.mColor = currentColor;
+	    	WorkSpaceView.mPaint.setColor(WorkSpaceView.mColor);
+			WorkSpaceView.mPaint.setStrokeWidth(WorkSpaceView.mSize);
+			break;
 		case pensize_L:
 			Toast.makeText(this, "You chose large font size", Toast.LENGTH_LONG).show();
-			WorkSpaceView.mSize = 5;
-			currentSize = 5;
+			WorkSpaceView.mSize = 10;
+			currentSize = 10;
 			WorkSpaceView.mColor = currentColor;
 	    	WorkSpaceView.mPaint.setColor(WorkSpaceView.mColor);
 			WorkSpaceView.mPaint.setStrokeWidth(WorkSpaceView.mSize);
@@ -284,8 +301,10 @@ public class MainframeActivity extends Activity {
 			e.printStackTrace();
 		}
     }
-
 	public void saveClick(View view) {
+		showDialog(2);
+	}
+	public void cSave() {
 		File f = new File(Environment.getExternalStorageDirectory() + "/Pictures/whiteboard.png");
 		Log.i("Save", "Save");
 		
