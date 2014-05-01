@@ -22,8 +22,13 @@ public class JoinInterface_activity extends Activity {
         final Uri uri = intent.getData(); 
         if (!String.valueOf(uri).equals("null")){
         	setTitle(String.valueOf(uri).split("://")[1]);
-        	((EditText) findViewById(R.id.ipedit)).setText(String.valueOf(uri).split("://")[1].split("[:]")[0]);
-        	((EditText) findViewById(R.id.passedit)).setText(String.valueOf(uri).split("://")[1].split("[:]")[1]);
+        	if (String.valueOf(uri).split(":").length == 3){
+        		((EditText) findViewById(R.id.ipedit)).setText(String.valueOf(uri).split("://")[1].split("[:]")[0]);
+        		((EditText) findViewById(R.id.passedit)).setText(String.valueOf(uri).split("://")[1].split("[:]")[1]);
+        	}
+        	else {
+        		((EditText) findViewById(R.id.ipedit)).setText(String.valueOf(uri).split("://")[1]);
+        	}
         }
         else
         	setTitle("Join a Board");
