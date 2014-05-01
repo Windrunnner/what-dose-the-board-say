@@ -12,6 +12,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -24,6 +25,7 @@ public class WorkSpaceView extends View
     public static WorkSpaceView mWorkSpaceView = null;
     public static MainframeActivity mMainframeActivity = null;
     public static Bitmap mmBitmap = null;
+    public static Bitmap loadBitmap = null;
       
     private Bitmap mBitmap;  //保存每次绘画的结果  
     private Handler messageHandler;
@@ -31,8 +33,9 @@ public class WorkSpaceView extends View
     public static int mMode;
     public static int mColor;
     public static int mSize;
-	private static boolean isRanLine;
+	public static boolean isRanLine;
     public static boolean isClean;
+    public static boolean isLoad;
       
     public WorkSpaceView(Context context, AttributeSet attrs) {  
         super(context, attrs);
@@ -50,6 +53,7 @@ public class WorkSpaceView extends View
         mSize = 2;
         isRanLine = false;
         isClean = false;
+        isLoad = false;
         
         ranLine = new RandomLineMsg(mColor, mSize);
         
@@ -101,6 +105,19 @@ public class WorkSpaceView extends View
         		}
     		}
     	}
+    	
+    	if (obj instanceof LoadMsg)
+    	{
+    		System.out.println("Great Chen BABA!!!");
+    		LoadMsg loadMsg = (LoadMsg) obj;
+    		isLoad = true;
+    		loadBitmap = Bitmap.createBitmap(loadMsg.mWidth, loadMsg.mHeight, Bitmap.Config.ARGB_8888);
+    		loadBitmap.setPixels(loadMsg.mPixels, 0, loadMsg.mWidth, 0, 0, loadMsg.mWidth, loadMsg.mHeight);
+    		
+    		Message message = Message.obtain();
+    		message.obj = loadMsg;
+    		messageHandler.sendMessage(message);
+    	}
     }
   
     private void createWhiteBitmap(Bitmap bitmap, int width, int height)
@@ -150,10 +167,16 @@ public class WorkSpaceView extends View
         	createWhiteBitmap(mBitmap, width, height);
         	isClean = false;
         }
+        else if (isLoad)
+        {
+        	mBitmap = loadBitmap.copy(Bitmap.Config.ARGB_8888, true);
+        	isLoad = false;
+        }
         else
         {
         	tmpCanvas.drawLine(mLastX, mLastY, mCurrX, mCurrY, mPaint);
         }
+        
         //再把Bitmap画到canvas上  
         canvas.drawBitmap(mBitmap, 0, 0, mPaint);
         mmBitmap = mBitmap;
