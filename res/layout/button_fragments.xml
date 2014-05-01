@@ -66,6 +66,7 @@
         android:layout_alignLeft="@+id/text_button"
         android:layout_alignRight="@+id/text_button"
         android:layout_below="@+id/text_button"
+        android:onClick="loadClick"
         android:background="@drawable/buttonimage"
         android:text="Image" />
 

@@ -11,12 +11,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
-import android.app.Dialog;
 import android.app.AlertDialog.Builder;
+import android.app.Dialog;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
@@ -32,6 +34,7 @@ import android.widget.Toast;
 public class MainframeActivity extends Activity {
 	public static final int MODE_PENCIL = 0;
 	public static final int MODE_ERASER = 1;
+	public static final String defaultSavePath = Environment.getExternalStorageDirectory() + "/Pictures/whiteboard.png";
 	public int buttonflag = 0;
 	Button penbutton;
 	Button eraserbutton;
@@ -305,7 +308,7 @@ public class MainframeActivity extends Activity {
 		showDialog(2);
 	}
 	public void cSave() {
-		File f = new File(Environment.getExternalStorageDirectory() + "/Pictures/whiteboard.png");
+		File f = new File(defaultSavePath);
 		Log.i("Save", "Save");
 		
 		if (f.exists())
@@ -333,6 +336,30 @@ public class MainframeActivity extends Activity {
 		{
 			e.printStackTrace();
 		}	
+	}
+	
+	public void loadClick(View view)
+	{
+		BitmapFactory.Options option = new BitmapFactory.Options();
+		option.inJustDecodeBounds = true;
+		option.inPreferredConfig = Bitmap.Config.ARGB_8888;
+		BitmapFactory.decodeFile(defaultSavePath, option);
+		int width = option.outWidth;
+		int height = option.outHeight;
+		
+		Bitmap bitmap = BitmapFactory.decodeFile(defaultSavePath);
+		int[] pixels = new int[width * height];
+		bitmap.getPixels(pixels, 0, width, 0, 0, width, height);
+		
+		Log.i("Load", "Load");
+		IMessage loadMsg = new LoadMsg(pixels, width, height);
+    	WorkSpaceView.mWorkSpaceView.messageReceived(loadMsg);
+    	/*try {
+			GDB_sc.sendByteMessage(GDB_sc.getBytes(loadMsg));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
 	}
 	
 	public void showToast(final String string){
