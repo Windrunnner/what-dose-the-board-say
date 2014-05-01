@@ -64,6 +64,10 @@ public class MainframeActivity extends Activity {
 		registerForContextMenu(penbutton);
 		registerForContextMenu(eraserbutton);
 		WorkSpaceView.mMainframeActivity = this;
+		if (GDB_sc.getIsServer())
+			this.setTitle("Whiteboard: Server");
+		else
+			this.setTitle("Whiteboard: Client " + JoinInterface_activity.uid);
 	}
 
 /*	@Override
